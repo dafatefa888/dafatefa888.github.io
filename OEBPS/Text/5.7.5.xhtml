@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="5-7-5-nextval-">5.7.5　nextval数组值推导</h3>
+
+  <p>改良后，我们之前的例子nextval值就与next值不完全相同了。比如：</p>
+
+  <p>1．T="ababaaaba"（如表5-7-5所示）</p>
+
+  <p>表5-7-5</p>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>j</td>
+
+        <td>123456789</td>
+      </tr>
+
+      <tr>
+        <td>模式串T</td>
+
+        <td>ababaaaba</td>
+      </tr>
+
+      <tr>
+        <td>next[j]</td>
+
+        <td>011234223</td>
+      </tr>
+
+      <tr>
+        <td>nextval[j]</td>
+
+        <td>010104210</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>先算出next数组的值分别为011234223，然后再分别判断。</p>
+
+  <p>1）当j=1时，nextval[1]=0；</p>
+
+  <p>2）当j=2时，因第二位字符“b”的next值是1，而第一位就是“a”，它们不相等，所以nextval[2]=next[2]=1，维持原值。</p>
+
+  <p>3）当j=3时，因为第三位字符“a”的next值为1，所以与第一位的“a”比较得知它们相等，所以nextval[3]=nextval[1]=0；如图5-7-7所示。</p>
+
+  <p><img alt="" src="../Images/5-7-7.jpg" /></p>
+
+  <p>图5-7-7</p>
+
+  <p>4）当j=4时，第四位的字符“b”next值为2，所以与第二位的“b”相比较得到结果是相等，因此nextval[4]=nextval[2]=1；如图5-7-8所示。</p>
+
+  <p><img alt="" src="../Images/5-7-8.jpg" /></p>
+
+  <p>图5-7-8</p>
+
+  <p>5）当j=5时，next值为3，第五个字符“a”与第三个字符“a”相等，因此nextval[5]=nextval[3]=0；</p>
+
+  <p>6）当j=6时，next值为4，第六个字符“a”与第四个字符“b”不相等，因此nextval[6]=4；</p>
+
+  <p>7）当j=7时，next值为2，第七个字符“a”与第二个字符“b”不相等，因此nextval[7]=2；</p>
+
+  <p>8）当j=8时，next值为2，第八个字符“b”与第二个字符“b”相等，因此nextval[8]=nextval[2]=1；</p>
+
+  <p>9）当j=9时，next值为3，第九个字符“a”与第三个字符“a”相等，因此nextval[9]=nextval[3]=0。</p>
+
+  <p>2．T="aaaaaaaab"（如表5-7-6）</p>
+
+  <p>表5-7-6</p>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>j</td>
+
+        <td>123456789</td>
+      </tr>
+
+      <tr>
+        <td>模式串T</td>
+
+        <td>aaaaaaaab</td>
+      </tr>
+
+      <tr>
+        <td>next[j]</td>
+
+        <td>012345678</td>
+      </tr>
+
+      <tr>
+        <td>nextval[j]</td>
+
+        <td>000000008</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>先算出next数组的值分别为012345678，然后再分别判断。</p>
+
+  <p>1）当j=1时，nextval[1]=0；</p>
+
+  <p>2）当j=2时，next值为1，第二个字符与第一个字符相等，所以nextval[2]=nextval[1]=0；</p>
+
+  <p>3）同样的道理，其后都为0……；</p>
+
+  <p>4）当j=9时，next值为8，第九个字符“b”与第八个字符“a”不相等，所以nextval[9]=8。</p>
+
+  <p>总结改进过的KMP算法，它是在计算出next值的同时，如果a位字符与它next值指向的b位字符相等，则该a位的nextval就指向b位的nextval值，如果不等，则该a位的nextval值就是它自己a位的next的值。</p>
+</body>
+</html>

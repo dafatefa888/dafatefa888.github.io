@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h2 id="4-13-">4.13　队列的链式存储结构及实现</h2>
+
+  <p>队列的链式存储结构，其实就是线性表的单链表，只不过它只能尾进头出而已，我们把它简称为链队列。为了操作上的方便，我们将队头指针指向链队列的头结点，而队尾指针指向终端结点，如图4-13-1所示。</p>
+
+  <p><img alt="" src="../Images/4-13-1.jpg" /></p>
+
+  <p>图4-13-1</p>
+
+  <p>空队列时，front和rear都指向头结点，如图4-13-2所示。</p>
+
+  <p><img alt="" src="../Images/4-13-2.jpg" /></p>
+
+  <p>图4-13-2</p>
+
+  <p>链队列的结构为：</p>
+  <pre>
+/* QElemType类型根据实际情况而定，这里假设为int */
+typedef int QElemType;       
+/* 结点结构 */
+typedef struct QNode         
+{
+    QElemType data;
+    struct QNode *next;
+} QNode, *QueuePtr;
+/* 队列的链表结构 */
+typedef struct               
+{
+    /* 队头、队尾指针 */
+    QueuePtr front, rear;    
+} LinkQueue;
+</pre>
+
+  <h3 id="4-13-1-">4.13.1　队列的链式存储结构——入队操作</h3>
+
+  <p>入队操作时，其实就是在链表尾部插入结点，如图4-13-3所示。</p>
+
+  <p><img alt="" src="../Images/4-13-3.jpg" /></p>
+
+  <p>图4-13-3</p>
+
+  <p>其代码如下：</p>
+  <pre>
+/* 插入元素e为Q的新的队尾元素 */
+Status EnQueue(LinkQueue *Q, QElemType e)
+{
+    QueuePtr s = 
+(QueuePtr)malloc(sizeof(QNode));
+    /* 存储分配失败 */
+    if (!s)               
+        exit(OVERFLOW);
+    s-&gt;data = e;
+    s-&gt;next = NULL;
+    /* 把拥有元素e新结点s赋值给原队尾结点的后继， */
+    Q-&gt;rear-&gt;next = s;    
+    /* 见上图中① */
+    /* 把当前的s设置为队尾结点，rear指向s，见上图中② */
+    Q-&gt;rear = s;          
+    return OK;
+}
+</pre>
+
+  <h3 id="4-13-2-">4.13.2　队列的链式存储结构——出队操作</h3>
+
+  <p>出队操作时，就是头结点的后继结点出队，将头结点的后继改为它后面的结点，若链表除头结点外只剩一个元素时，则需将rear指向头结点，如图4-13-4所示。</p>
+
+  <p><img alt="" src="../Images/4-13-4.jpg" /></p>
+
+  <p>图4-13-4</p>
+
+  <p>代码如下：</p>
+  <pre>
+/* 若队列不空，删除Q的队头元素，用e返回其值，
+并返回OK，否则返回ERROR */
+Status DeQueue(LinkQueue *Q, QElemType *e)
+{
+    QueuePtr p;
+    if (Q-&gt;front == Q-&gt;rear)
+        return ERROR;
+    /* 将欲删除的队头结点暂存给p，见上图中① */
+    p = Q-&gt;front-&gt;next;          
+    /* 将欲删除的队头结点的值赋值给e */
+    *e = p-&gt;data;                
+    /* 将原队头结点后继p-&gt;next赋值给头结点后继， */
+    Q-&gt;front-&gt;next = p-&gt;next;    
+    /* 见上图中② */
+    /* 若队头是队尾，则删除后将rear指向头结点，见上图中③ */
+    if (Q-&gt;rear == p)            
+        Q-&gt;rear = Q-&gt;front;
+    free(p);
+    return OK;
+}
+</pre>
+
+  <p>对于循环队列与链队列的比较，可以从两方面来考虑，从时间上，其实它们的基本操作都是常数时间，即都为O(1)的，不过循环队列是事先申请好空间，使用期间不释放，而对于链队列，每次申请和释放结点也会存在一些时间开销，如果入队出队频繁，则两者还是有细微差异。对于空间上来说，循环队列必须有一个固定的长度，所以就有了存储元素个数和空间浪费的问题。而链队列不存在这个问题，尽管它需要一个指针域，会产生一些空间上的开销，但也可以接受。所以在空间上，链队列更加灵活。</p>
+
+  <p>总的来说，在可以确定队列长度最大值的情况下，建议用循环队列，如果你无法预估队列的长度时，则用链队列。</p>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="8-7-2-">8.7.2　平衡二叉树实现算法</h3>
+
+  <p>好了，有这么多的准备工作，我们可以来讲解代码了。首先是需要改进二叉排序树的结点结构，增加一个bf，用来存储平衡因子。</p>
+  <pre>
+/* 二叉树的二叉链表结点结构定义 */
+/* 结点结构 */
+typedef struct BiTNode                  
+{
+    /* 结点数据 */
+    int data;                           
+    /* 结点的平衡因子 */
+    int bf;                             
+    /* 左右孩子指针 */
+    struct BiTNode *lchild, *rchild;    
+} BiTNode, *BiTree;
+</pre>
+
+  <p>然后，对于右旋操作，我们的代码如下。</p>
+  <pre>
+/* 对以p为根的二叉排序树作右旋处理， */
+/* 处理之后p指向新的树根结点，即旋转处理之前
+   的左子树的根结点 */
+void R_Rotate(BiTree *P)
+{
+    BiTree L;
+    /* L指向P的左子树根结点 */
+    L = (*P)-&gt;lchild;            
+    /* L的右子树挂接为P的左子树 */
+    (*P)-&gt;lchild = L-&gt;rchild;    
+    L-&gt;rchild = (*P);
+    /* P指向新的根结点 */
+    *P = L;                      
+}
+</pre>
+
+  <p>此函数代码的意思是说，当传入一个二叉排序树P，将它的左孩子结点定义为L，将L的右子树变成P的左子树，再将P改成L的右子树，最后将L替换P成为根结点。这样就完成了一次右旋操作，如图8-7-9所示。图中三角形代表子树，N代表新增结点。</p>
+
+  <p><img alt="" src="../Images/8-7-9.jpg" /></p>
+
+  <p>图8-7-9</p>
+
+  <p>上面例子中的新增加结点N（如图8-7-5的图1和图2），就是右旋操作。</p>
+
+  <p>左旋操作代码如下。</p>
+  <pre>
+/* 对以P为根的二叉排序树作左旋处理， */
+/* 处理之后P指向新的树根结点，即旋转处理之前
+   的右子树的根结点0 */
+void L_Rotate(BiTree *P)
+{
+    BiTree R;
+    /* R指向P的右子树根结点 */
+    R = (*P)-&gt;rchild;            
+    /* R的左子树挂接为P的右子树 */
+    (*P)-&gt;rchild = R-&gt;lchild;    
+    R-&gt;lchild = (*P);
+    /* P指向新的根结点 */
+    *P = R;                      
+}
+</pre>
+
+  <p>这段代码与右旋代码是对称的，在此不做解释了。上面例子中的新增结点5、6、7（如图8-7-5的图4、5，图8-7-6的图6、7、8、9），都是左旋操作。</p>
+
+  <p>现在我们来看左平衡旋转处理的函数代码。</p>
+  <pre>
+#define LH +1  /* 左高 */
+#define EH 0   /* 等高 */
+#define RH -1  /* 右高 */
+/* 对以指针T所指结点为根的二叉树作左平衡旋转
+   处理 */
+/* 本算法结束时，指针T指向新的根结点 */
+void LeftBalance(BiTree *T)
+{
+    BiTree L,Lr;
+    /* L指向T的左子树根结点 */
+    L = (*T)-&gt;lchild;               
+    switch (L-&gt;bf)
+    {                               
+    /* 检查T的左子树的平衡度，并作相应平衡处理 */
+    /* 新结点插入在T的左孩子的左子树上，要作单右旋处理 */
+    case LH:                        
+        (*T)-&gt;bf = L-&gt;bf = EH;
+        R_Rotate(T);
+        break;
+    /* 新结点插入在T的左孩子的右子树上，要作双旋处理 */
+    case RH:                        
+        /* Lr指向T的左孩子的右子树根 */
+        Lr = L-&gt;rchild;             
+        /* 修改T及其左孩子的平衡因子 */
+        switch (Lr-&gt;bf)             
+        {
+        case LH: (*T)-&gt;bf = RH;
+            L-&gt;bf = EH;
+            break;
+        case EH: (*T)-&gt;bf = L-&gt;bf = EH;
+            break;
+        case RH: (*T)-&gt;bf = EH;
+            L-&gt;bf = LH;
+            break;
+        }
+        Lr-&gt;bf = EH;
+        /* 对T的左子树作左旋平衡处理 */
+        L_Rotate(&amp;(*T)-&gt;lchild);    
+        /* 对T作右旋平衡处理 */
+        R_Rotate(T);                
+    }
+}
+</pre>
+
+  <p>首先，我们定义了三个常数变量，分别代表1、0、-1。</p>
+
+  <p>1.函数被调用，传入一个需调整平衡性的子树T。由于LeftBalance函数被调用时，其实是已经确认当前子树是不平衡状态，且左子树的高度大于右子树的高度。换句话说，此时T的根结点应该是平衡因子BF的值大于1的数。<br />
+  2.第4行，我们将T的左孩子赋值给L。<br />
+  3.第5～27行是分支判断。<br />
+  4.当L的平衡因子为LH，即为1时，表明它与根结点的BF值符号相同，因此，第8行，将它们的BF值都改为0，并且第9行，进行右旋操作。操作的方式如图8-7-9所示。<br />
+  5.当L的平衡因子为RH，即为-1时，表明它与根结点的BF值符号相反，此时需要做双旋处理。第13～22行，针对L的右孩子L<sub>r</sub>的BF作判断，修改根结点T和L的BF值。第24行将当前L<sub>r</sub>的BF改为0。<br />
+  6.第25行，对根结点的左子树进行左旋，如图8-7-10第二图所示。<br />
+  7.第26行，对根结点进行右旋，如图8-7-10的第三图所示，完成平衡操作。</p>
+
+  <p><img alt="" src="../Images/8-7-10.jpg" /></p>
+
+  <p>图8-7-10</p>
+
+  <p>同样的，右平衡旋转处理的函数代码非常类似，直接看代码，不做讲解了。</p>
+
+  <p>我们前面例子中的新增结点9和8就是典型的右平衡旋转，并且双旋完成平衡的例子（如图8-7-7的图11、12，图8-7-8的图14、15、16所示）。</p>
+
+  <p>有了这些准备，我们的主函数才算是正式登场了。</p>
+  <pre>
+/* 若在平衡的二叉排序树T中不存在和e有相同关键
+   字的结点，则插入一个 */
+/* 数据元素为e的新结点并返回1，否则返回0。若
+   因插入而使二叉排序树 */
+/* 失去平衡，则作平衡旋转处理，布尔变量taller
+   反映T长高与否。 */
+Status InsertAVL(BiTree *T, int e, Status *taller)
+{
+    if (!*T)
+    {                                                    
+        /* 插入新结点，树“长高”，置taller为TRUE */
+        *T = (BiTree)malloc(sizeof(BiTNode));
+        (*T)-&gt;data = e;
+        (*T)-&gt;lchild = (*T)-&gt;rchild = NULL;
+        (*T)-&gt;bf = EH;
+        *taller = TRUE;
+    }
+    else
+    {
+        if (e == (*T)-&gt;data)
+        {                                                
+            /* 树中已存在和e有相同关键字的结点则不再插入 */
+            *taller = FALSE;
+            return FALSE;
+        }
+        if (e &lt; (*T)-&gt;data)
+        {                                                
+            /* 应继续在T的左子树中进行搜索 */
+            /* 未插入 */
+            if (!InsertAVL(&amp;(*T)-&gt;lchild, e, taller))    
+                return FALSE;
+            /* 已插入到T的左子树中且左子树“长高” */
+            if (*taller)                                 
+            {
+                /* 检查T的平衡度 */
+                switch ((*T)-&gt;bf)                        
+                {
+                /* 原本左子树比右子树高，需要作左平衡处理 */
+                case LH:                                 
+                    LeftBalance(T);
+                    *taller = FALSE;
+                    break;
+                /* 原本左右子树等高，现因左子树增高而树增高 */
+                case EH:                                 
+                    (*T)-&gt;bf = LH;
+                    *taller = TRUE;
+                    break;
+                /* 原本右子树比左子树高，现左右子树等高 */
+                case RH:                                 
+                    (*T)-&gt;bf = EH;
+                    *taller = FALSE;
+                    break;
+                }
+            }
+        }
+        else
+        {                                                
+            /* 应继续在T的右子树中进行搜索 */
+            /* 未插入 */
+            if (!InsertAVL(&amp;(*T)-&gt;rchild, e, taller))    
+                return FALSE;
+            /* 已插入到T的右子树且右子树“长高” */
+            if (*taller)                                 
+            {
+                /* 检查T的平衡度 */
+                switch ((*T)-&gt;bf)                        
+                {
+                /* 原本左子树比右子树高，现左、右子树等高 */
+                case LH:                                 
+                    (*T)-&gt;bf = EH;
+                    *taller = FALSE;
+                    break;
+                /* 原本左右子树等高，现因右子树增高而树增高 */
+                case EH:                                 
+                    (*T)-&gt;bf = RH;
+                    *taller = TRUE;
+                    break;
+                 /* 原本右子树比左子树高，需要作右平衡处理 */
+                case RH:                                
+                    RightBalance(T);
+                    *taller = FALSE;
+                    break;
+                }
+            }
+        }
+    }
+    return TRUE;
+}
+</pre>
+
+  <p>1.程序开始执行时，第3～10行是指当前T为空时，则申请内存新增一个结点。 2.第13～17行表示当存在相同结点，则不需要插入。 3.第18～40行，当新结点e小于T的根结点值时，则在T的左子树查找。 4.第20～21行，递归调用本函数，直到找到则返回false，否则说明插入结点成功，执行下面语句。 5.第22～39行，当taller为TRUE时，说明插入了结点，此时需要判断T的平衡因子，如果是1，说明左子树高于右子树，需要调用LeftBalance函数进行左平衡旋转处理。如果为0或-1，则说明新插入结点没有让整棵二叉排序树失去平衡性，只需要修改相关的BF值即可。 6.第41～63行，说明新结点e大于T的根结点的值，在T的右子树查找。代码上述类似，不再详述。</p>
+
+  <p>对于这段代码来说，我们只需要在需要构建平衡二叉树的时候执行如下列代码即可在内存中生成一棵与图8-7-4的图2相同的平衡的二叉树。</p>
+  <pre>
+int i;
+int a[10] = { 3, 2, 1, 4, 5, 6, 7, 10, 9, 8 };
+BiTree T = NULL;
+Status taller;
+for (i = 0; i &lt; 10; i++)
+{
+    InsertAVL(&amp;T, a[i], &amp;taller);
+}
+</pre>
+
+  <p>不容易，终于讲完了，本算法代码很长，是有些复杂，编程中容易在很多细节上出错，要想真正掌握它，需要同学们自己多练习。不过其思想还是不难理解的，总之就是把不平衡消灭在最早时刻。</p>
+
+  <p>如果我们需要查找的集合本身没有顺序，在频繁查找的同时也需要经常的插入和删除操作，显然我们需要构建一棵二叉排序树，但是不平衡的二叉排序树，查找效率是非常低的，因此我们需要在构建时，就让这棵二叉排序树是平衡二叉树，此时我们的查找时间复杂度就为O(logn)，而插入和删除也为O(logn)。这显然是比较理想的一种动态查找表算法。</p>
+</body>
+</html>

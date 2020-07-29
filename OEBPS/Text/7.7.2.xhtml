@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="7-7-2-floyd-">7.7.2　弗洛伊德（Floyd）算法</h3>
+
+  <p>为了能讲明白弗洛伊德（Floyd）算法的精妙所在，我们先来看最简单的案例。图7-7-12的左图是一个最简单的3个顶点连通网图。</p>
+
+  <p><img alt="" src="../Images/7-7-12.jpg" /></p>
+
+  <p>图7-7-12</p>
+
+  <p>我们先定义两个二维数组D[3][3]和P[3][3]，D代表顶点到顶点的最短路径权值和的矩阵。P代表对应顶点的最小路径的前驱矩阵，用来存储路径。在未分析任何顶点之前，我们将D命名为D<sub>-1</sub>，其实它就是初始的图的邻接矩阵。将P命名为P<sub>-1</sub>，初始化为图中所示的矩阵。</p>
+
+  <p>首先我们来分析，所有的顶点经过v<sub>0</sub>后到达另一顶点的最短路径。因为只有三个顶点，因此需要查看v<sub>-1</sub>→v<sub>0</sub>→v<sub>2</sub>，得到D<sub>-1</sub>[1][0]+D<sub>-1</sub>[0][2]=2+1=3。D<sub>-1</sub>[1][2]表示的是v<sub>1</sub>→v<sub>2</sub>的权值为5，我们发现D<sub>-1</sub>[1][2]&gt;D<sub>-1</sub>[1][0]+D<sub>-1</sub>[0][2]，通俗的话讲就是v<sub>1</sub>→v<sub>0</sub>→v<sub>2</sub>比直接v<sub>1</sub>→v<sub>2</sub>距离还要近。所以我们就让D<sub>-1</sub>[1][2]=D<sub>-1</sub>[1][0]+D<sub>-1</sub>[0][2]=3，同样的D<sub>-1</sub>[2][1]=3，于是就有了D<sub>0</sub>的矩阵。因为有变化，所以P矩阵对应的P<sub>-1</sub>[1][2]和P<sub>-1</sub>[2][1]也修改为当前中转的顶点v<sub>0</sub>的下标0，于是就有了P<sub>0</sub>。也就是说D<sub>0</sub>[v][w]=min{D<sub>-1</sub>[v][w],D<sub>-1</sub>[v][0]+D<sub>-1</sub>[0][w]}</p>
+
+  <p>接下来，其实也就是在D<sub>0</sub>和P<sub>0</sub>的基础上继续处理所有顶点经过v<sub>1</sub>和v<sub>2</sub>后到达另一顶点的最短路径，得到D<sub>1</sub>和P<sub>1</sub>、D<sub>2</sub>和P<sub>2</sub>完成所有顶点到所有顶点的最短路径计算工作。</p>
+
+  <p>如果我就用这么简单的图形来讲解代码，大家一定会觉得不能说明什么问题。所以我们还是以前面的复杂网图为例，来讲解弗洛伊德（Floyd）算法。</p>
+
+  <p>首先我们针对图7-7-13的左网图准备两个矩阵D<sub>-1</sub>和P<sub>-1</sub>，D<sub>-1</sub>就是网图的邻接矩阵，P<sub>-1</sub>初设为P[i][j]=j这样的矩阵，它主要用来存储路径。</p>
+
+  <p><img alt="" src="../Images/7-7-13.jpg" /></p>
+
+  <p>图7-7-13</p>
+
+  <p>代码如下，注意因为是求所有顶点到所有顶点的最短路径，因此Pathmatirx和ShortPathTable都是二维数组。</p>
+  <pre>
+typedef int Pathmatirx[MAXVEX][MAXVEX];
+typedef int ShortPathTable[MAXVEX][MAXVEX];
+/* Floyd算法，求网图G中各顶点v到其余顶点w最短
+   路径P[v][w]及带权长度D[v][w] */
+void ShortestPath_Floyd(MGraph G, Pathmatirx *P, 
+                        ShortPathTable *D)
+{
+    int v, w, k;
+    /* 初始化D与P */
+    for (v = 0; v &lt; G.numVertexes; ++v)         
+       for (w = 0; w &lt; G.numVertexes; ++w)
+        {
+           /* D[v][w]值即为对应点间的权值 */
+           (*D)[v][w] = G.matirx[v][w];        
+           /* 初始化P */
+           (*P)[v][w] = w;                     
+        }
+    }
+    for (k = 0; k &lt; G.numVertexes; ++k)
+    {
+        for (v = 0; v &lt; G.numVertexes; ++v)
+        {
+            for (w = 0; w &lt; G.numVertexes; ++w)
+            {
+                if ((*D)[v][w] &gt; (*D)[v][k] + (*D)[k][w])
+                {                               
+                    /* 如果经过下标为k顶点路径比原两点间路径更短 */
+                    /* 将当前两点间权值设为更小的一个 */
+                    (*D)[v][w] = (*D)[v][k] + (*D)[k][w];
+                    /* 路径设置经过下标为k的顶点 */
+                    (*P)[v][w] = (*P)[v][k];    
+                }
+            }
+        }
+    }
+}
+</pre>
+
+  <p>1．程序开始运行，第4～11行就是初始化了D和P，使得它们成为图7-7-13的两个矩阵。从矩阵也得到，v<sub>0</sub>→v<sub>1</sub>路径权值是1，v<sub>0</sub>→v<sub>2</sub>路径权值是5，v<sub>0</sub>→v<sub>3</sub>无边连线，所以路径权值为极大值65535。</p>
+
+  <p>2．第12～25行，是算法的主循环，一共三层嵌套，k代表的就是中转顶点的下标。v代表起始顶点，w代表结束顶点。</p>
+
+  <p>3．当K=0时，也就是所有的顶点都经过v<sub>0</sub>中转，计算是否有最短路径的变化。可惜结果是，没有任何变化，如图7-7-14所示。</p>
+
+  <p><img alt="" src="../Images/7-7-14.jpg" /></p>
+
+  <p>图7-7-14</p>
+
+  <p>4．当K=1时，也就是所有的顶点都经过v<sub>1</sub>中转。此时，当v=0时，原本D[0][2]=5，现在由于D[0][1]+D[1][2]=4。因此由代码的第20行，二者取其最小值，得到D[0][2]=4，同理可得D[0][3]=8、D[0][4]=6，当v=2、3、4时，也修改了一些数据，请参考如图7-7-15左图中虚线框数据。由于这些最小权值的修正，所以在路径矩阵P上，也要作处理，将它们都改为当前的P[v][k]值，见代码第21行。</p>
+
+  <p><img alt="" src="../Images/7-7-15.jpg" /></p>
+
+  <p>图7-7-15</p>
+
+  <p>5．接下来就是k=2一直到8结束，表示针对每个顶点做中转得到的计算结果，当然，我们也要清楚，D<sub>0</sub>是以D<sub>-1</sub>为基础，D<sub>1</sub>是以D<sub>0</sub>为基础，……，D<sub>8</sub>是以D<sub>7</sub>为基础，就像我们曾经说过的七个包子的故事，它们是有联系的，路径矩阵P也是如此。最终当k=8时，两矩阵数据如图7-7-16所示。</p>
+
+  <p><img alt="" src="../Images/7-7-16.jpg" /></p>
+
+  <p>图7-7-16</p>
+
+  <p>至此，我们的最短路径就算是完成了，你可以看到矩阵第v<sub>0</sub>行的数值与迪杰斯特拉（Dijkstra）算法求得的D数组的数值是完全相同，都是{0,1,4,7,5,8,10,12,16}。而且这里是所有顶点到所有顶点的最短路径权值和都可以计算出。</p>
+
+  <p>那么如何由P这个路径数组得出具体的最短路径呢？以v<sub>0</sub>到v<sub>8</sub>为例，从图7-7-16的右图第v<sub>8</sub>列，P[0][8]=1，得到要经过顶点v<sub>1</sub>，然后将1取代0得到P[1][8]=2，说明要经过v<sub>2</sub>，然后将2取代1得到P[2][8]=4，说明要经过v<sub>4</sub>，然后将4取代2得到P[4][8]=3，说明要经过v<sub>3</sub>，……，这样很容易就推导出最终的最短路径值为v<sub>0</sub>→v<sub>1</sub>→v<sub>2</sub>→v<sub>4</sub>→v<sub>3</sub>→v<sub>6</sub>→v<sub>7</sub>→v<sub>8</sub>。</p>
+
+  <p>求最短路径的显示代码可以这样写。</p>
+  <pre>
+for (v = 0; v &lt; G.numVertexes; ++v)
+{
+    for (w = v + 1; w &lt; G.numVertexes; w++)
+    {
+        printf("v%d-v%d weight: %d ", v, w, D[v][w]);
+        /* 获得第一个路径顶点下标 */
+        k = P[v][w];                
+        /* 打印源点 */
+        printf(" path: %d", v);     
+        /* 如果路径顶点下标不是终点 */
+        while (k != w)              
+        {
+            /* 打印路径顶点 */
+            printf(" -&gt; %d", k);    
+            /* 获得下一个路径顶点下标 */
+            k = P[k][w];            
+        }
+        /* 打印终点 */
+        printf(" -&gt; %d\n", w);      
+    }
+    printf("\n");
+}
+</pre>
+
+  <p>再次回过头来看看弗洛伊德（Floyd）算法，它的代码简洁到就是一个二重循环初始化加一个三重循环权值修正，就完成了所有顶点到所有顶点的最短路径计算。几乎就如同是我们在学习C语言循环嵌套的样例代码而已。如此简单的实现，真是巧妙之极，在我看来，这是非常漂亮的算法，不知道你们是否喜欢？很可惜由于它的三重循环，因此也是O(n<sup>3</sup>)时间复杂度。如果你面临需要求所有顶点至所有顶点的最短路径问题时，弗洛伊德（Floyd）算法应该是不错的选择。</p>
+
+  <p>另外，我们虽然对求最短路径的两个算法举例都是无向图，但它们对有向图依然有效，因为二者的差异仅仅是邻接矩阵是否对称而已。</p>
+</body>
+</html>

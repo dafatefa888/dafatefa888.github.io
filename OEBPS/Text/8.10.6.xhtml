@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="8-10-6-">8.10.6　随机数法</h3>
+
+  <p>选择一个随机数，取关键字的随机函数值为它的散列地址。也就是f(key)=random(key)。这里random是随机函数。当关键字的长度不等时，采用这个方法构造散列函数是比较合适的。</p>
+
+  <p>有同学问，那如果关键字是字符串如何处理？其实无论是英文字符，还是中文字符，也包括各种各样的符号，它们都可以转化为某种数字来对待，比如ASCII码或者Unicode码等，因此也就可以使用上面的这些方法。</p>
+
+  <p>总之，现实中，应该视不同的情况采用不同的散列函数。我们只能给出一些考虑的因素来提供参考： 1.计算散列地址所需的时间。 2.关键字的长度。 3.散列表的大小。 4.关键字的分布情况。 5.记录查找的频率。综合这些因素，才能决策选择哪种散列函数更合适。</p>
+</body>
+</html>

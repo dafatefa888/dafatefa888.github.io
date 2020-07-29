@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h2 id="7-8-">7.8　拓扑排序</h2>
+
+  <p>说了两个有环的图应用，现在我们来谈谈无环的图应用。无环，即是图中没有回路的意思。</p>
+
+  <h3 id="7-8-1-">7.8.1　拓扑排序介绍</h3>
+
+  <p>我们会把施工过程、生产流程、软件开发、教学安排等都当成一个项目工程来对待，所有的工程都可分为若干个“活动”的子工程。例如图7-8-1是我这非专业人士绘制的一张电影制作流程图，现实中可能并不完全相同，但基本表达了一个工程和若干个活动的概念。在这些活动之间，通常会受到一定的条件约束，如其中某些活动必须在另一些活动完成之后才能开始。就像电影制作不可能在人员到位进驻场地时，导演还没有找到，也不可能在拍摄过程中，场地都没有。这都会导致荒谬的结果。因此这样的工程图，一定是无环的有向图。</p>
+
+  <p>在一个表示工程的有向图中，用顶点表示活动，用弧表示活动之间的优先关系，这样的有向图为顶点表示活动的网，我们称为AOV网（ActivityOn Vertex Network）。AOV网中的弧表示活动之间存在的某种制约关系。比如演职人员确定了，场地也联系好了，才可以开始进场拍摄。另外就是AOV网中不能存在回路。刚才已经举了例子，让某个活动的开始要以自己完成作为先决条件，显然是不可以的。</p>
+
+  <p><img alt="" src="../Images/7-8-1.jpg" /></p>
+
+  <p>图7-8-1</p>
+
+  <p>设G=(V,E)是一个具有n个顶点的有向图，V中的顶点序列v<sub>1</sub>，v<sub>2</sub>，……，v<sub>n</sub>，满足若从顶点v<sub>i</sub>到v<sub>j</sub>有一条路径，则在顶点序列中顶点v<sub>i</sub>必在顶点v<sub>j</sub>之前。则我们称这样的顶点序列为一个拓扑序列。</p>
+
+  <p>图7-8-1这样的AOV网的拓扑序列不止一条。序列v<sub>0</sub> v<sub>1</sub> v<sub>2</sub> v<sub>3</sub> v<sub>4</sub> v<sub>5</sub> v<sub>6</sub> v<sub>7</sub> v<sub>8</sub> v<sub>9</sub> v<sub>10</sub> v<sub>11</sub> v<sub>12</sub> v<sub>13</sub> v<sub>14</sub> v<sub>15</sub> v<sub>16</sub> 是一条拓扑序列，而v<sub>0</sub> v<sub>1</sub> v<sub>4</sub> v<sub>3</sub> v<sub>2</sub> v<sub>7</sub> v<sub>6</sub> v<sub>5</sub> v<sub>8</sub> v<sub>10</sub> v<sub>9</sub> v<sub>12</sub> v<sub>11</sub> v<sub>14</sub> v<sub>13</sub> v<sub>15</sub> v<sub>16</sub>也是一条拓扑序列。</p>
+
+  <p>所谓拓扑排序，其实就是对一个有向图构造拓扑序列的过程。构造时会有两个结果，如果此网的全部顶点都被输出，则说明它是不存在环（回路）的AOV网；如果输出顶点数少了，哪怕是少了一个，也说明这个网存在环（回路），不是AOV网。</p>
+
+  <p>一个不存在回路的AOV网，我们可以将它应用在各种各样的工程或项目的流程图中，满足各种应用场景的需要，所以实现拓扑排序的算法就很有价值了。</p>
+
+  <h3 id="7-8-2-">7.8.2　拓扑排序算法</h3>
+
+  <p>对AOV网进行拓扑排序的基本思路是：从AOV网中选择一个入度为0的顶点输出，然后删去此顶点，并删除以此顶点为尾的弧，继续重复此步骤，直到输出全部顶点或者AOV网中不存在入度为0的顶点为止。</p>
+
+  <p>首先我们需要确定一下这个图需要使用的数据结构。前面求最小生成树和最短路径时，我们用的都是邻接矩阵，但由于拓扑排序的过程中，需要删除顶点，显然用邻接表会更加方便。因此我们需要为AOV网建立一个邻接表。考虑到算法过程中始终要查找入度为0的顶点，我们在原来顶点表结点结构中，增加一个入度域in，结构如表7-8-1所示，其中in就是入度的数字。</p>
+
+  <p>表7-8-1</p>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>indata</td>
+
+        <td>first</td>
+
+        <td>edge</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>因此对于图7-8-2的第一幅图AOV网，我们可以得到如第二幅图的邻接表数据结构。</p>
+
+  <p><img alt="" src="../Images/7-8-2.jpg" /></p>
+
+  <p>图7-8-2</p>
+
+  <p>在拓扑排序算法中，涉及的结构代码如下。</p>
+  <pre>
+/* 边表结点 */
+typedef struct EdgeNode          
+{
+    /* 邻接点域，存储该顶点对应的下标 */
+    int adjvex;                  
+    /* 用于存储权值，对于非网图可以不需要 */
+    int weight;                  
+    /* 链域，指向下一个邻接点 */
+    struct EdgeNode *next;       
+} EdgeNode;
+/* 顶点表结点 */
+typedef struct VertexNode        
+{
+    /* 顶点入度*/
+    int in;                      
+    /* 顶点域，存储顶点信息 */
+    int data;                    
+    /* 边表头指针 */
+    EdgeNode *firstedge;         
+} VertexNode, AdjList[MAXVEX];
+typedef struct
+{
+    AdjList adjList;
+    /* 图中当前顶点数和边数 */
+    int numVertexes,numEdges;    
+} graphAdjList, *GraphAdjList;
+</pre>
+
+  <p>在算法中，我还需要辅助的数据结构—栈，用来存储处理过程中入度为0的顶点，目的是为了避免每个查找时都要去遍历顶点表找有没有入度为0的顶点。</p>
+
+  <p>现在我们来看代码，并且模拟运行它。</p>
+  <pre>
+/* 拓扑排序，若GL无回路，则输出拓扑排序序列并
+   返回OK，若有回路返回ERROR */
+Status TopologicalSort(GraphAdjList GL)
+{
+    EdgeNode *e;
+    int i, k, gettop;
+    /* 用于栈指针下标 */
+    int top = 0;                                       
+    /* 用于统计输出顶点的个数 */
+    int count = 0;                                     
+    /* 建栈存储入度为0的顶点 */
+    int *stack;                                        
+    stack = (int *)malloc(GL-&gt;numVertexes * sizeof(int));
+    for (i = 0; i &lt; GL-&gt;numVertexes; i++)
+       if (GL-&gt;adjList[i].in == 0)
+           /* 将入度为0的顶点入栈 */
+           stack[++top] = i;                          
+    while (top != 0)
+    {
+        /* 出栈 */
+        gettop = stack[top--];                         
+        /* 打印此顶点 */
+        printf("%d -&gt; ", GL-&gt;adjList[gettop].data);    
+        /* 统计输出顶点数 */
+        count++;                                       
+        /* 对此顶点弧表遍历 */
+        for (e = GL-&gt;adjList[gettop].firstedge; e; e = e-&gt;next)
+        {                                              
+            k = e-&gt;adjvex;
+            /* 将k号顶点邻接点的入度减1 */
+            if (!(--GL-&gt;adjList[k].in))                
+                /*若为0则入栈，以便于下次循环输出 */
+                stack[++top] = k;                      
+        }
+    }
+    /*如果count小于顶点数，说明存在环 */
+    if (count &lt; GL-&gt;numVertexes)                       
+        return ERROR;
+    else
+        return OK;
+}
+</pre>
+
+  <p>1．程序开始运行，第3～7行都是变量的定义，其中stack是一个栈，用来存储整型的数字。</p>
+
+  <p>2．第8～10行，作了一个循环判断，把入度为0的顶点下标都入栈，从图7-8-3的右图邻接表可知，此时stack应该为：{0,1,3}，即v<sub>0</sub>、v<sub>1</sub>、v<sub>3</sub>的顶点入度为0，如图7-8-3所示。</p>
+
+  <p><img alt="" src="../Images/7-8-3.jpg" /></p>
+
+  <p>图7-8-3</p>
+
+  <p>3．第12～23行，while循环，当栈中有数据元素时，始终循环。</p>
+
+  <p>4．第14～16行，v<sub>3</sub>出栈得到gettop=3。并打印此顶点，然后count加1。</p>
+
+  <p>5．第17～22行，循环其实是对v<sub>3</sub>顶点对应的弧链表进行遍历，即图7-8-4中的灰色部分，找到v<sub>3</sub>连接的两个顶点v<sub>2</sub>和v<sub>13</sub>，并将它们的入度减少一位，此时v<sub>2</sub>和v<sub>13</sub>的in值都为1。它的目的是为了将v<sub>3</sub>顶点上的弧删除。</p>
+
+  <p><img alt="" src="../Images/7-8-4.jpg" /></p>
+
+  <p>图7-8-4</p>
+
+  <p>6．再次循环，第12～23行。此时处理的是顶点v<sub>1</sub>。经过出栈、打印、count=2后，我们对v<sub>1</sub>到v<sub>2</sub>、v<sub>4</sub>、v<sub>8</sub>的弧进行了遍历。并同样减少了它们的入度数，此时v<sub>2</sub>入度为0，于是由第20～21行知，v<sub>2</sub>入栈，如图7-8-5所示。试想，如果没有在顶点表中加入in这个入度数据域，20行的判断就必须要是循环，这显然是要消耗时间的，我们利用空间换取了时间。</p>
+
+  <p><img alt="" src="../Images/7-8-5.jpg" /></p>
+
+  <p>图7-8-5</p>
+
+  <p>7．接下来，就是同样的处理方式了。图7-8-6展示了v<sub>2</sub> v<sub>6</sub> v<sub>0</sub> v<sub>4</sub> v<sub>5</sub> v<sub>8</sub>的打印删除过程，后面还剩几个顶点都类似，就不图示了。</p>
+
+  <p><img alt="" src="../Images/7-8-6.jpg" /></p>
+
+  <p>图7-8-6</p>
+
+  <p>8．最终拓扑排序打印结果为3-&gt;1-&gt;2-&gt;6-&gt;0-&gt;4-&gt;5-&gt;8-&gt;7-&gt;12-&gt;9-&gt;10-&gt;13-&gt;11。当然这结果并不是唯一的一种拓扑排序方案。</p>
+
+  <p>分析整个算法，对一个具有n个顶点e条弧的AOV网来说，第8～10行扫描顶点表，将入度为0的顶点入栈的时间复杂为O(n)，而之后的while循环中，每个顶点进一次栈，出一次栈，入度减1的操作共执行了e次，所以整个算法的时间复杂度为O(n+e)。</p>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="8-6-1-">8.6.1　二叉排序树查找操作</h3>
+
+  <p>首先我们提供一个二叉树的结构。</p>
+  <pre>
+/* 二叉树的二叉链表结点结构定义 */
+/* 结点结构 */
+typedef  struct BiTNode                 
+{
+    /* 结点数据 */
+    int data;                           
+    /* 左右孩子指针 */
+    struct BiTNode *lchild, *rchild;    
+} BiTNode, *BiTree;
+</pre>
+
+  <p>然后我们来看看二叉排序树的查找是如何实现的。</p>
+  <pre>
+/* 递归查找二叉排序树T中是否存在key, */
+/* 指针f指向T的双亲，其初始调用值为NULL */
+/* 若查找成功，则指针p指向该数据元素结点，并
+   返回TRUE */
+/* 否则指针p指向查找路径上访问的最后一个结点
+   并返回FALSE */
+Status SearchBST(BiTree T, int key, BiTree f, BiTree *p)
+{
+    /* 查找不成功 */
+    if (!T)                                        
+    {
+        *p = f;
+        return FALSE;
+    }
+    /* 查找成功 */
+    else if (key == T-&gt;data)                       
+    {
+       *p = T;
+       return TRUE;
+    }
+    else if (key &lt; T-&gt;data)
+        /* 在左子树继续查找 */
+        return SearchBST(T-&gt;lchild, key, T, p);    
+    else
+        /* 在右子树继续查找 */
+        return SearchBST(T-&gt;rchild, key, T, p);    
+}
+</pre>
+
+  <p>1．SearchBST函数是一个可递归运行的函数，函数调用时的语句为SearchBST(T,93,NULL,p)，参数T是一个二叉链表，其中数据如图8-6-3所示，key代表要查找的关键字，目前我们打算查找93，二叉树f指向T的双亲，当T指向根结点时，f的初值就为NULL，它在递归时有用，最后的参数p是为了查找成功后可以得到查找到的结点位置。</p>
+
+  <p>2．第3～7行，是用来判断当前二叉树是否到叶子结点，显然图8-6-3告诉我们当前T指向根结点62的位置，T不为空，第5～6行不执行。</p>
+
+  <p>3．第8～12行是查找到相匹配的关键字时执行语句，显然93≠62，第10～11行不执行。</p>
+
+  <p>4．第13～14行是当要查找关键字小于当前结点值时执行语句，由于93&gt;62，第14行不执行。</p>
+
+  <p>5．第15～16行是当要查找关键字大于当前结点值时执行语句，由于93&gt;62，所以递归调用SearchBST(T-&gt;rchild,key,T,p)。此时T指向了62的右孩子88，如图8-6-4所示。</p>
+
+  <p><img alt="" src="../Images/8-6-4.jpg" /></p>
+
+  <p>图8-6-4</p>
+
+  <p>6．此时第二层SearchBST，因93比88大，所以执行第16行，再次递归调用SearchBST(T-&gt;rchild,key,T,p)。此时T指向了88的右孩子99，如图8-6-5所示。</p>
+
+  <p><img alt="" src="../Images/8-6-5.jpg" /></p>
+
+  <p>图8-6-5</p>
+
+  <p>7．第三层的SearchBST，因93比99小，所以执行第14行，递归调用SearchBST(T-&gt;lchild,key,T,p)。此时T指向了99的左孩子93，如图8-6-6所示。</p>
+
+  <p><img alt="" src="../Images/8-6-6.jpg" /></p>
+
+  <p>图8-6-6</p>
+
+  <p>8．第四层SearchBST，因key等于T-&gt;data，所以执行第10～11行，此时指针p指向93所在的结点，并返回True到第三层、第二层、第一层，最终函数返回True。</p>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h2 id="4-4-">4.4　栈的顺序存储结构及实现</h2>
+
+  <h3 id="4-4-1-">4.4.1　栈的顺序存储结构</h3>
+
+  <p>既然栈是线性表的特例，那么栈的顺序存储其实也是线性表顺序存储的简化，我们简称为顺序栈。线性表是用数组来实现的，想想看，对于栈这种只能一头插入删除的线性表来说，用数组哪一端来作为栈顶和栈底比较好？</p>
+
+  <p>对，没错，下标为0的一端作为栈底比较好，因为首元素都存在栈底，变化最小，所以让它作栈底。</p>
+
+  <p>我们定义一个top变量来指示栈顶元素在数组中的位置，这top就如同中学物理学过的游标卡尺的游标，如图4-4-1，它可以来回移动，意味着栈顶的top可以变大变小，但无论如何游标不能超出尺的长度。同理，若存储栈的长度为StackSize，则栈顶位置top必须小于StackSize。当栈存在一个元素时，top等于0，因此通常把空栈的判定条件定为top等于-1。</p>
+
+  <p><img alt="" src="../Images/4-4-1.jpg" /></p>
+
+  <p>图4-4-1</p>
+
+  <p>来看栈的结构定义</p>
+  <pre>
+/* SElemType类型根据实际情况而定，这里假设为int */
+typedef int SElemType;    
+typedef struct
+{
+    SElemType data[MAXSIZE];
+    /* 用于栈顶指针 */
+    int top;              
+}SqStack;
+</pre>
+
+  <p>若现在有一个栈，StackSize是5，则栈普通情况、空栈和栈满的情况、空栈和栈满的情况示意图如图4-4-2所示。</p>
+
+  <p><img alt="" src="../Images/4-4-2.jpg" /></p>
+
+  <p>图4-4-2</p>
+
+  <h3 id="4-4-2-">4.4.2　栈的顺序存储结构——进栈操作</h3>
+
+  <p>对于栈的插入，即进栈操作，其实就是做了如图4-4-3所示的处理。</p>
+
+  <p><img alt="" src="../Images/4-4-3.jpg" /></p>
+
+  <p>图4-4-3</p>
+
+  <p>因此对于进栈操作push，其代码如下：</p>
+  <pre>
+/* 插入元素e为新的栈顶元素 */
+Status Push(SqStack *S, SElemType e)
+{
+    /* 栈满 */
+    if (S-&gt;top == MAXSIZE - 1)    
+    {
+        return ERROR;
+    }
+    /* 栈顶指针增加一 */
+    S-&gt;top++;                     
+    /* 将新插入元素赋值给栈顶空间 */
+    S-&gt;data[S-&gt;top] = e;          
+    return OK;
+}
+</pre>
+
+  <h3 id="4-4-3-">4.4.3　栈的顺序存储结构——出栈</h3>
+
+  <p>操作</p>
+
+  <p>出栈操作pop，代码如下：</p>
+  <pre>
+/* 若栈不空，则删除S的栈顶元素，用e返回其值，
+   并返回OK；否则返回ERROR */
+Status Pop(SqStack *S, SElemType *e)
+{
+    if (S-&gt;top == -1)
+        return ERROR;
+    /* 将要删除的栈顶元素赋值给e */
+    *e = S-&gt;data[S-&gt;top];    
+    /* 栈顶指针减一 */
+    S-&gt;top--;                
+    return OK;
+}
+</pre>
+
+  <p>两者没有涉及到任何循环语句，因此时间复杂度均是O(1)。</p>
+</body>
+</html>

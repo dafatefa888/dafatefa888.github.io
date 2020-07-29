@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="7-7-1-dijkstra-">7.7.1　迪杰斯特拉（Dijkstra）算法</h3>
+
+  <p>这是一个按路径长度递增的次序产生最短路径的算法。它的思路大体是这样的。</p>
+
+  <p>比如说要求图7-7-3中顶点v<sub>0</sub>到顶点v<sub>1</sub>的最短距离，没有比这更简单的了，答案就是1，路径就是直接v<sub>0</sub>连线到v<sub>1</sub>。</p>
+
+  <p><img alt="" src="../Images/7-7-3.jpg" /></p>
+
+  <p>图7-7-3</p>
+
+  <p>由于顶点v<sub>1</sub>还与v<sub>2</sub>、v<sub>3</sub>、v<sub>4</sub>连线，所以此时我们同时求得了v<sub>0</sub>→v<sub>1</sub>→v<sub>2</sub>=1+3=4，v<sub>0</sub>→v<sub>1</sub>→ v<sub>3</sub>=1+7=8，v<sub>0</sub>→v<sub>1</sub>→v<sub>4</sub>=1+5=6。</p>
+
+  <p>现在，我问v<sub>0</sub>到v<sub>2</sub>的最短距离，如果你不假思索地说是5，那就犯错了。因为边上都有权值，刚才已经有v<sub>0</sub>→v<sub>1</sub>→v<sub>2</sub>的结果是4，比5还要小1个单位，它才是最短距离，如图7-7-4所示。</p>
+
+  <p><img alt="" src="../Images/7-7-4.jpg" /></p>
+
+  <p>图7-7-4</p>
+
+  <p>由于顶点v<sub>2</sub>还与v<sub>4</sub>、v<sub>5</sub>连线，所以此时我们同时求得了v<sub>0</sub>→v<sub>2</sub>→v<sub>4</sub>其实就是v<sub>0</sub>→v<sub>1</sub>→v<sub>2</sub>→v<sub>4</sub>=4+1=5，v<sub>0</sub>→v<sub>2</sub>→v<sub>5</sub>=4+7=11。这里v<sub>0</sub>→v<sub>2</sub>我们用的是刚才计算出来的较小的4。此时我们也发现v<sub>0</sub>→v<sub>1</sub>→v<sub>2</sub>→v<sub>4</sub>=5要比v<sub>0</sub>→v<sub>1</sub>→v<sub>4</sub>=6还要小。所以v<sub>0</sub>到v<sub>4</sub>目前的最小距离是5，如图7-7-5所示。</p>
+
+  <p><img alt="" src="../Images/7-7-5.jpg" /></p>
+
+  <p>图7-7-5</p>
+
+  <p>当我们要求v<sub>0</sub>到v<sub>3</sub>的最短距离时，通向v<sub>3</sub>的三条边，除了v<sub>6</sub>没有研究过外，v<sub>0</sub>→v<sub>1</sub>→v<sub>3</sub>的结果是8，而v<sub>0</sub>→v<sub>4</sub>→v<sub>3</sub>=5+2=7。因此，v<sub>0</sub>到v<sub>3</sub>的最短距离是7，如图7-7-6所示。</p>
+
+  <p><img alt="" src="../Images/7-7-6.jpg" /></p>
+
+  <p>图7-7-6</p>
+
+  <p>好了，我想你大致明白，这个迪杰斯特拉（Di-jkstra）算法是如何干活的了。它并不是一下子就求出了v<sub>0</sub>到v<sub>8</sub>的最短路径，而是一步步求出它们之间顶点的最短路径，过程中都是基于已经求出的最短路径的基础上，求得更远顶点的最短路径，最终得到你要的结果。</p>
+
+  <p>如果还是不太明白，不要紧，现在我们来看代码，从代码的模拟运行中，再次去理解它的思想。</p>
+  <pre>
+#define MAXVEX 9
+#define INFINITY 65535
+typedef int 
+/* 用于存储最短路径下标的数组 */
+Patharc[MAXVEX];                       
+typedef int 
+/* 用于存储到各点最短路径的权值和 */
+ShortPathTable[MAXVEX];                
+/* Dijkstra算法，求有向网G的v<sub>0</sub>顶点到其余顶点v最短路径P[v]及带权长度D[v] */
+/* P[v]的值为前驱顶点下标，D[v]表示v<sub>0</sub>到v的最短路径长度和。 */
+void ShortestPath_Dijkstra(MGraph G, int v0, 
+                           Patharc *P, ShortPathTable *D)
+{
+    int v, w, k, min;
+    /* final[w]=1表示求得顶点v<sub>0</sub>至v<sub>w</sub>的最短路径 */
+    int final[MAXVEX];                          
+    /* 初始化数据 */
+    for (v = 0; v &lt; G.numVertexes; v++)         
+    {
+        /* 全部顶点初始化为未知最短路径状态 */
+        final[v] = 0;                           
+        /* 将与v<sub>0</sub>点有连线的顶点加上权值 */
+        (*D)[v] = G.arc[v0][v];                 
+        /* 初始化路径数组P为-1 */
+        (*P)[v] = -1;                           
+    }
+    /* v<sub>0</sub>至v<sub>0</sub>路径为0 */
+    (*D)[v0] = 0;                               
+    /* v<sub>0</sub>至v<sub>0</sub>不需要求路径 */
+    final[v0] = 1;                              
+    /* 开始主循环，每次求得v<sub>0</sub>到某个v顶点的最短路径 */
+    for (v = 1; v &lt; G.numVertexes; v++)
+    {
+        /* 当前所知离v<sub>0</sub>顶点的最近距离 */
+        min=INFINITY;                           
+        /* 寻找离v<sub>0</sub>最近的顶点 */
+        for (w = 0; w &lt; G.numVertexes; w++)     
+         {
+            if (!final[w] &amp;&amp; (*D)[w] &lt; min)
+            {
+                k=w;
+                /* w顶点离v<sub>0</sub>顶点更近 */
+                min = (*D)[w];                  
+            }
+        }
+        /* 将目前找到的最近的顶点置为1 */
+        final[k] = 1;                           
+        /* 修正当前最短路径及距离 */
+        for (w = 0; w &lt; G.numVertexes; w++)     
+        {   
+            /* 如果经过v顶点的路径比现在这条路径的长度短的话 */
+            if (!final[w] &amp;&amp; (min + G.arc[k][w] &lt; (*D)[w]))
+            {                                   
+                /* 说明找到了更短的路径，修改D[w]和P[w] */
+                /* 修改当前路径长度 */
+                (*D)[w] = min + G.arc[k][w];    
+                (*P)[w]=k;
+            }
+        }
+    }
+}
+</pre>
+
+  <p>调用此函数前，其实我们需要为图7-7-7的左图准备邻接矩阵MGraph的G，如图7-7-7的右图，并且定义参数v<sub>0</sub>为0。</p>
+
+  <p><img alt="" src="../Images/7-7-7.jpg" /></p>
+
+  <p>图7-7-7</p>
+
+  <p>1．程序开始运行，第4行final数组是为了v<sub>0</sub>到某顶点是否已经求得最短路径的标记，如果v<sub>0</sub>到v<sub>w</sub>已经有结果，则fi-nal[w]=1。</p>
+
+  <p>2．第5～10行，是在对数据进行初始化的工作。此时final数组值均为0，表示所有的点都未求得最短路径。D数组为{65535,1,5,65535,65535,65535,65535,65535,65535}。因为v<sub>0</sub>与v<sub>1</sub>和v<sub>2</sub>的边权值为1和5。P数组全为0，表示目前没有路径。</p>
+
+  <p>3．第11行，表示v<sub>0</sub>到v<sub>0</sub>自身，权值和结果为0。D数组为{0,1,5,65535,65535,65535,65535,65535,65535}。第12行，表示v<sub>0</sub>点算是已经求得最短路径，因此final[0]=1。此时final数组为{1,0,0,0,0,0,0,0,0}。此时整个初始化工作完成。</p>
+
+  <p>4．第13～33行，为主循环，每次循环求得v<sub>0</sub>与一个顶点的最短路径。因此v从1而不是0开始。</p>
+
+  <p>5．第15～23行，先令min为65535的极大值，通过w循环，与D[w]比较找到最小值min=1，k=1。</p>
+
+  <p>6．第24行，由k=1，表示与v<sub>0</sub>最近的顶点是v<sub>1</sub>，并且由D[1]=1，知道此时v<sub>0</sub>到v<sub>1</sub>的最短距离是1。因此将v<sub>1</sub>对应的final[1]设置为1。此时final数组为{1,1,0,0,0,0,0,0,0}。</p>
+
+  <p>7．第25～32行是一循环，此循环甚为关键。它的目的是在刚才已经找到v<sub>0</sub>与v<sub>1</sub>的最短路径的基础上，对v<sub>1</sub>与其他顶点的边进行计算，得到v<sub>0</sub>与它们的当前最短距离，如图7-7-8所示。因为min=1，所以本来D[2]=5，现在v<sub>0</sub>→v<sub>1</sub>→v<sub>2</sub>=D[2]=min+3=4，v<sub>0</sub>→v<sub>1</sub>→v<sub>3</sub>=D[3]=min+7=8，v<sub>0</sub>→v<sub>1</sub>→v<sub>4</sub>=D[4]=min+5=6，因此，D数组当前值为{0,1,4,8,6,65535,65535,65535,65535}。而P[2]=1，P[3]=1，P[4]=1，它表示的意思是v<sub>0</sub>到v<sub>2</sub>、v<sub>3</sub>、v<sub>4</sub>点的最短路径它们的前驱均是v<sub>1</sub>。此时P数组值为：{0,0,1,1,1,0,0,0,0}。</p>
+
+  <p><img alt="" src="../Images/7-7-8.jpg" /></p>
+
+  <p>图7-7-8</p>
+
+  <p>8．重新开始循环，此时v=2。第15～23行，对w循环，注意因为final[0]=1和fi-nal[1]=1，由第18行的!final[w]可知，v<sub>0</sub>与v<sub>1</sub>并不参与最小值的获取。通过循环比较，找到最小值min=4，k=2。</p>
+
+  <p>9．第24行，由k=2，表示已经求出v<sub>0</sub>到v<sub>2</sub>的最短路径，并且由D[2]=4，知道最短距离是4。因此将v<sub>2</sub>对应的final[2]设置为1，此时final数组为：{1,1,1,0,0,0,0,0,0}。10．第25～32行。在刚才已经找到v<sub>0</sub>与v<sub>2</sub>的最短路径的基础上，对v<sub>2</sub>与其他顶点的边，进行计算，得到v<sub>0</sub>与它们的当前最短距离，如图7-7-9所示。因为min=4，所以本来D[4]=6，现在v<sub>0</sub>→v<sub>2</sub>→v<sub>4</sub>=D[4]=min+1=5，v<sub>0</sub>→v<sub>2</sub>→v<sub>5</sub>=D[5]=min+7=11，因此，D数组当前值为：{0,1,4,8,5,11,65535,65535,65535}。而原本P[4]=1，此时P[4]=2，P[5]=2，它表示v<sub>0</sub>到v<sub>4</sub>、v<sub>5</sub>点的最短路径它们的前驱均是v<sub>2</sub>。此时P数组值为：{0,0,1,1,2,2,0,0,0}。</p>
+
+  <p><img alt="" src="../Images/7-7-9.jpg" /></p>
+
+  <p>图7-7-9</p>
+
+  <p>11．重新开始循环，此时v=3。第15～23行，通过对w循环比较找到最小值min=5，k=4。12．第24行，由k=4，表示已经求出v<sub>0</sub>到v<sub>4</sub>的最短路径，并且由D[4]=5，知道最短距离是5。因此将v<sub>4</sub>对应的final[4]设置为1。此时final数组为：{1,1,1,0,1,0,0,0,0}。13．第25～32行。对v<sub>4</sub>与其他顶点的边进行计算，得到v<sub>0</sub>与它们的当前最短距离，如图7-7-10所示。因为min=5，所以本来D[3]=8，现在v<sub>0</sub>→v<sub>4</sub>→v<sub>3</sub>=D[3]=min+2=7，本来D[5]=11，现在v<sub>0</sub>→v<sub>4</sub>→v<sub>5</sub>=D[5]=min+3=8，另外v<sub>0</sub>→v<sub>4</sub>→v<sub>6</sub>=D[6]=min+6=11，v<sub>0</sub>→v<sub>4</sub>→v<sub>7</sub>=D[7]=min+9=14，因此，D数组当前值为：{0,1,4,7,5,8,11,14,65535}。而原本P[3]=1，此时P[3]=4，原本P[5]=2，此时P[5]=4，另外P[6]=4，P[7]=4，它表示v<sub>0</sub>到v<sub>3</sub>、v<sub>5</sub>、v<sub>6</sub>、v<sub>7</sub>点的最短路径它们的前驱均是v<sub>4</sub>。此时P数组值为：{0,0,1,4,2,4,4,4,0}。</p>
+
+  <p><img alt="" src="../Images/7-7-10.jpg" /></p>
+
+  <p>图7-7-10</p>
+
+  <p>14．之后的循环就完全类似了。得到最终的结果，如图7-7-11所示。此时final数组为：{1,1,1,1,1,1,1,1,1}，它表示所有的顶点均完成了最短路径的查找工作。此时D数组为：{0,1,4,7,5,8,10,12,16}，它表示v<sub>0</sub>到各个顶点的最短路径数，比如D[8]=1+3+1+2+3+2+4=16。此时的P数组为：{0,0,1,4,2,4,3,6,7}，这串数字可能略为难理解一些。比如P[8]=7，它的意思是v<sub>0</sub>到v<sub>8</sub>的最短路径，顶点v<sub>8</sub>的前驱顶点是v<sub>7</sub>，再由P[7]=6表示v<sub>7</sub>的前驱是v<sub>6</sub>，P[6]=3，表示v<sub>6</sub>的前驱是v<sub>3</sub>。这样就可以得到，v<sub>0</sub>到v<sub>8</sub>的最短路径为v<sub>8</sub>←v<sub>7</sub>←v<sub>6</sub>←v<sub>3</sub>←v<sub>4</sub>←v<sub>2</sub>←v<sub>1</sub>←v<sub>0</sub>，即v<sub>0</sub>→v<sub>1</sub>→v<sub>2</sub>→v<sub>4</sub>→v<sub>3</sub>→v<sub>6</sub>→v<sub>7</sub>→v<sub>8</sub>。</p>
+
+  <p><img alt="" src="../Images/7-7-11.jpg" /></p>
+
+  <p>图7-7-11</p>
+
+  <p>其实最终返回的数组D和数组P，是可以得到v<sub>0</sub>到任意一个顶点的最短路径和路径长度的。例如v<sub>0</sub>到v<sub>8</sub>的最短路径并没有经过v<sub>5</sub>，但我们已经知道v<sub>0</sub>到v<sub>5</sub>的最短路径了。由D[5]=8可知它的路径长度为8，由P[5]=4可知v<sub>5</sub>的前驱顶点是v<sub>4</sub>，所以v<sub>0</sub>到v<sub>5</sub>的最短路径是v<sub>0</sub>→v<sub>1</sub>→v<sub>2</sub>→v<sub>4</sub>→v<sub>5</sub>。</p>
+
+  <p>也就是说，我们通过迪杰斯特拉（Dijkstra）算法解决了从某个源点到其余各顶点的最短路径问题。从循环嵌套可以很容易得到此算法的时间复杂度为O(n<sup>2</sup>)，尽管有同学觉得，可不可以只找到从源点到某一个特定终点的最短路径，其实这个问题和求源点到其他所有顶点的最短路径一样复杂，时间复杂度依然是O(n<sup>2</sup>)。</p>
+
+  <p>这就好比，你吃了七个包子终于算是吃饱了，就感觉很不划算，前六个包子白吃了，应该直接吃第七个包子，于是你就去寻找可以吃一个就能饱肚子的包子，能够满足你的要求最终结果只能有一个，那就是用七个包子的面粉和馅做的一个大包子。这种只关注结果而忽略过程的思想是非常不可取的。</p>
+
+  <p>可如果我们还需要知道如v<sub>3</sub>到v<sub>5</sub>、v<sub>1</sub>到v<sub>7</sub>这样的任一顶点到其余所有顶点的最短路径怎么办呢？此时简单的办法就是对每个顶点当作源点运行一次迪杰斯特拉（Dijkstra）算法，等于在原有算法的基础上，再来一次循环，此时整个算法的时间复杂度就成了O(n<sup>3</sup>)。</p>
+
+  <p>对此，我们现在再来介绍另一个求最短路径的算法——弗洛伊德（Floyd），它求所有顶点到所有顶点的时间复杂度也是O(n<sup>3</sup>)，但其算法非常简洁优雅，能让人感觉到智慧的无限魅力。好了，让我们就一同来欣赏和学习它吧。</p>
+</body>
+</html>

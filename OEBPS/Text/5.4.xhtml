@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h2 id="5-4-">5.4　串的抽象数据类型</h2>
+
+  <p>串的逻辑结构和线性表很相似，不同之处在于串针对的是字符集，也就是串中的元素都是字符，哪怕串中的字符是“123”这样的数字组成，或者“2010-10-10”这样的日期组成，它们都只能理解为长度为3和长度为10的字符串，每个元素都是字符而已。</p>
+
+  <p>因此，对于串的基本操作与线性表是有很大差别的。线性表更关注的是单个元素的操作，比如查找一个元素，插入或删除一个元素，但串中更多的是查找子串位置、得到指定位置子串、替换子串等操作。</p>
+  <pre>
+ADT 串(string)
+Data
+    串中元素仅由一个字符组成，相邻元素具有前驱和后继关系。
+Operation
+    StrAssign(T, *chars):        生成一个其值等于字符串常量chars的串T。
+    StrCopy(T, S):               串S存在，由串S复制得串T。
+    ClearString(S):              串S存在，将串清空。
+    StringEmpty(S):              若串S为空，返回true，否则返回false。
+    StrLength(S):                返回串S的元素个数，即串的长度。
+    StrCompare(S, T):            若S&gt;T，返回值&gt;0，若S=T，返回0，若S&lt;T，返回值&lt;0。
+    Concat(T, S1, S2):           用T返回由S1和S2联接而成的新串。
+    SubString(Sub, S, pos, len): 串S存在，1≤pos≤StrLength(S)，
+                                 且0≤len≤StrLength(S)-pos+1，用Sub返
+                                 回串S的第pos个字符起长度为len的子串。
+    Index(S, T, pos):            串S和T存在，T是非空串，1≤pos≤StrLength(S)。
+                                 若主串S中存在和串T值相同的子串，则返回它在主串S中
+                                 第pos个字符之后第一次出现的位置，否则返回0。
+    Replace(S, T, V):            串S、T和V存在，T是非空串。用V替换主串S中出现的所有
+                                 与T相等的不重叠的子串。
+    StrInsert(S, pos, T):        串S和T存在，1≤pos≤StrLength(S)+1。
+                                 在串S的第pos个字符之前插入串T。
+    StrDelete(S, pos, len):      串S存在，1≤pos≤StrLength(S)-len+1。
+                                 从串S中删除第pos个字符起长度为len的子串。
+endADT
+</pre>
+
+  <p>对于不同的高级语言，其实对串的基本操作会有不同的定义方法，所以同学们在用某个语言操作字符串时，需要先查看它的参考手册关于字符串的基本操作有哪些。不过还好，不同语言除方法名称外，操作实质都是相类似的。比如C#中，字符串操作就还有ToLower转小写、ToUpper转大写、In-dexOf从左查找子串位置（操作名有修改）、LastIndexOf从右查找子串位置、Trim去除两边空格等比较方便的操作，它们其实就是前面这些基本操作的扩展函数。</p>
+
+  <p>我们来看一个操作Index的实现算法。</p>
+  <pre>
+/* T为非空串。若主串S中第pos个字符之后存在与T
+相等的子串， */
+/* 则返回第一个这样的子串在S中的位置，否则返
+回0 */
+int Index(String S, String T, int pos)
+{
+    int n, m, i;
+    String sub;
+    if (pos &gt; 0)
+    {
+        /* 得到主串S的长度 */
+        n = StrLength(S);                   
+        /* 得到子串T的长度 */
+        m = StrLength(T);                   
+        i = pos;
+        while (i &lt;= n - m + 1)
+        {
+            /* 取主串第i个位置 */
+            /* 长度与T相等子串给sub */
+            SubString(sub, S, i, m);        
+            /* 如果两串不相等 */
+            if (StrCompare(sub, T) != 0)    
+                ++i;
+            /* 如果两串相等 */
+            else                            
+                /* 则返回i值 */
+                return i;                   
+        }
+    }
+    /* 若无子串与T相等，返回0 */
+    return 0;                               
+}
+</pre>
+
+  <p>当中用到了StrLength、SubString、StrCom-pare等基本操作来实现。</p>
+</body>
+</html>

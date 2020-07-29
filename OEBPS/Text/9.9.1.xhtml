@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="9-9-1-">9.9.1　快速排序算法</h3>
+
+  <p>快速排序（Quick Sort）的基本思想是：通过一趟排序将待排记录分割成独立的两部分，其中一部分记录的关键字均比另一部分记录的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序的目的。</p>
+
+  <p>从字面上感觉不出它的好处来。假设现在要对数组{50,10,90,30,70,40,80,60,20}进行排序。我们通过代码的讲解来学习快速排序的精妙。</p>
+
+  <p>我们来看代码。</p>
+  <pre>
+/* 对顺序表L作快速排序 */
+void QuickSort(SqList *L)
+{
+    QSort(L, 1, L-&gt;length);
+}
+</pre>
+
+  <p>又是一句代码，和归并排序一样，由于需要递归调用，因此我们外封装了一个函数。现在我们来看QSort的实现。</p>
+  <pre>
+/* 对顺序表L中的子序列L-&gt;r[low..high]作快速排
+序 */
+void QSort(SqList *L, int low, int high)
+{
+    int pivot;
+    if (low &lt; high)
+    {
+        /* 将L-&gt;r[low..high]一分为二， */
+        /* 算出枢轴值pivot */
+        pivot = Partition(L, low, high);    
+        /* 对低子表递归排序 */
+        QSort(L, low, pivot - 1);           
+        /* 对高子表递归排序 */
+        QSort(L, pivot + 1, high);          
+    }
+}
+</pre>
+
+  <p>从这里，你应该能理解前面代码“QSort(L,1,L-&gt;length);”中1和L-&gt;length代码的意思了，它就是当前待排序的序列最小下标值low和最大下标值high。</p>
+
+  <p>这一段代码的核心是“pivot=Parti-tion(L,low,high);”在执行它之前，L.r的数组值为{50,10,90,30,70,40,80,60,20}。Partition函数要做的，就是先选取当中的一个关键字，比如选择第一个关键字50，然后想尽办法将它放到一个位置，使得它左边的值都比它小，右边的值比它大，我们将这样的关键字称为枢轴（pivot）。</p>
+
+  <p>在经过Partition(L,1,9)的执行之后，数组变成{20,10,40,30,50,70,80,60,90}，并返回值5给pivot，数字5表明50放置在数组下标为5的位置。此时，计算机把原来的数组变成了两个位于50左和右小数组{20,10,40,30}和{70,80,60,90}，而后的递归调用“QSort(L,1,5-1);”和“QSort(L,5+1,9);”语句，其实就是在对{20,10,40,30}和{70,80,60,90}分别进行同样的Partition操作，直到顺序全部正确为止。</p>
+
+  <p>到了这里，应该说理解起来还不算困难。下面我们就来看看快速排序最关键的Partition函数实现。</p>
+  <pre>
+/* 交换顺序表L中子表的记录，使枢轴记录到位，
+   并返回其所在位置 */
+/* 此时在它之前（后）的记录均不大（小）于
+   它。 */
+int Partition(SqList *L, int low, int high)
+{
+    int pivotkey;
+    /* 用子表的第一个记录作枢轴记录 */
+    pivotkey = L-&gt;r[low];      
+    /* 从表的两端交替向中间扫描 */
+    while (low &lt; high)         
+    {
+        while (low &lt; high &amp;&amp; L-&gt;r[high] &gt;= pivotkey)
+            high--;
+        /* 将比枢轴记录小的记录交换到低端 */
+        swap(L, low, high);    
+        while (low &lt; high &amp;&amp; L-&gt;r[low] &lt;= pivotkey)
+            low++;
+        /* 将比枢轴记录大的记录交换到高端 */
+        swap(L, low, high);    
+    }
+    /* 返回枢轴所在位置 */
+    return low;                
+}
+</pre>
+
+  <p>1．程序开始执行，此时low=1，high=L.length=9。第4行，我们将L.r[low]=L.r[1]=50赋值给枢轴变量piv-otkey，如图9-9-1所示。</p>
+
+  <p><img alt="" src="../Images/9-9-1.jpg" /></p>
+
+  <p>图9-9-1</p>
+
+  <p>2．第5～13行为while循环，目前low=1&lt;high=9，执行内部语句。</p>
+
+  <p>3．第7行，L.r[high]=L.r[9]=20≯piv-otkey=50，因此不执行第8行。</p>
+
+  <p>4．第9行，交换L.r[low]与L.r[high]的值，使得L.r[1]=20，L.r[9]=50。为什么要交换，就是因为通过第7行的比较知道，L.r[high]是一个比pivotkey=50（即L.r[low]）还要小的值，因此它应该交换到50的左侧，如图9-9-2所示。</p>
+
+  <p><img alt="" src="../Images/9-9-2.jpg" /></p>
+
+  <p>图9-9-2</p>
+
+  <p>5．第10行，当L.r[low]=L.r[1]=20，piv-otkey=50，L.r[low]&lt;pivotkey，因此第11行，low++，此时low=2。继续循环，L.r[2]=10&lt;50，low++，此时low=3。L.r[3]=90&gt;50，退出循环。</p>
+
+  <p>6．第12行，交换L.r[low]=L.r[3]与L.r[high]=L.r[9]的值，使得L.r[3]=50，L.r[9]=90。此时相当于将一个比50大的值90交换到了50的右边。注意此时low已经指向了3，如图9-9-3所示。</p>
+
+  <p><img alt="" src="../Images/9-9-3.jpg" /></p>
+
+  <p>图9-9-3</p>
+
+  <p>7．继续第5行，因为low=3&lt;high=9，执行循环体。</p>
+
+  <p>8．第7行，当L.r[high]=L.r[9]=90，piv-otkey=50，L.r[high]&gt;pivotkey，因此第8行，high--，此时high=8。继续循环，L.r[8]=60&gt;50，high--，此时high=7。L.r[7]=80&gt;50，high--，此时high=6。L.r[6]=40&lt;50，退出循环。</p>
+
+  <p>9．第9行，交换L.r[low]=L.r[3]=50与L.r[high]=L.r[6]=40的值，使得L.r[3]=40，L.r[6]=50，如图9-9-4所示。</p>
+
+  <p><img alt="" src="../Images/9-9-4.jpg" /></p>
+
+  <p>图9-9-4</p>
+
+  <p>10．第10行，当L.r[low]=L.r[3]=40，piv-otkey=50，L.r[low]&lt;pivotkey，因此第11行，low++，此时low=4。继续循环L.r[4]=30&lt;50，low++，此时low=5。L.r[5]=70&gt;50，退出循环。</p>
+
+  <p>11．第12行，交换L.r[low]=L.r[5]=70与L.r[high]=L.r[6]=50的值，使得L.r[5]=50，L.r[6]=70，如图9-9-5所示。</p>
+
+  <p><img alt="" src="../Images/9-9-5.jpg" /></p>
+
+  <p>图9-9-5</p>
+
+  <p>12．再次循环。因low=5&lt;high=6，执行循环体后，low=high=5，退出循环，如图9-9-6所示。</p>
+
+  <p><img alt="" src="../Images/9-9-6.jpg" /></p>
+
+  <p>图9-9-6</p>
+
+  <p>13．最后第14行，返回low的值5。函数执行完成。接下来就是递归调用“QSort(L,1,5-1);”和“QSort(L,5+1,9);”语句，对{20,10,40,30}和{70,80,60,90}分别进行同样的Partition操作，直到顺序全部正确为止。我们就不再演示了。</p>
+
+  <p>通过这段代码的模拟，大家应该能够明白，Partition函数，其实就是将选取的pivotkey不断交换，将比它小的换到它的左边，比它大的换到它的右边，它也在交换中不断更改自己的位置，直到完全满足这个要求为止。</p>
+</body>
+</html>

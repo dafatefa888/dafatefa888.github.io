@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="7-9-2-">7.9.2　关键路径算法</h3>
+
+  <p>我们将图7-9-2的AOE网转化为邻接表结构如图7-9-4所示，注意与拓扑排序时邻接表结构不同的地方在于，这里弧链表增加了weight域，用来存储弧的权值。</p>
+
+  <p><img alt="" src="../Images/7-9-4-1.jpg" /></p>
+
+  <p><img alt="" src="../Images/7-9-4-2.jpg" /></p>
+
+  <p>图7-9-4</p>
+
+  <p>求事件的最早发生时间etv的过程，就是我们从头至尾找拓扑序列的过程，因此，在求关键路径之前，需要先调用一次拓扑序列算法的代码来计算etv和拓扑序列列表。为此，我们首先在程序开始处声明几个全局变量。</p>
+  <pre>
+int *etv, *ltv;    /* 事件最早发生时间和最迟发生时间数组 */
+int *stack2;       /* 用于存储拓扑序列的栈 */
+int top2;          /* 用于stack2的指针 */
+</pre>
+
+  <p>其中stack2用来存储拓扑序列，以便后面求关键路径时使用。</p>
+
+  <p>下面是改进过的求拓扑序列算法。</p>
+  <pre>
+/* 拓扑排序，用于关键路径计算 */
+Status TopologicalSort(GraphAdjList GL)
+ {
+    EdgeNode *e;
+    int i, k, gettop;
+    /* 用于栈指针下标 */
+    int top = 0;                                              
+    /* 用于统计输出顶点的个数 */
+    int count = 0;                                            
+    /* 建栈将入度为0的顶点入栈 */
+    int *stack;                                               
+    stack = (int *)malloc(GL-&gt;numVertexes * sizeof(int));
+    for (i = 0; i &lt; GL-&gt;numVertexes; i++)
+       if (0 == GL-&gt;adjList[i].in)
+           stack[++top] = i;
+    /* 初始化为0 */
+    top2 = 0;                                                 
+    /* 事件最早发生时间 */
+    etv = (int *)malloc(GL-&gt;numVertexes * sizeof(int));       
+    for (i = 0; i &lt; GL-&gt;numVertexes; i++)
+        /* 初始化为0 */
+        etv[i] = 0;                                           \
+    /* 初始化 */
+    stack2 = (int *)malloc(GL-&gt;numVertexes * sizeof(int));    
+    while (top != 0)
+    {
+        gettop = stack[top--];
+        count++;
+        /* 将弹出的顶点序号压入拓扑序列的栈 */
+        stack2[++top2] = gettop;                              
+        for (e = GL-&gt;adjList[gettop].firstedge; e; e = e-&gt;next)
+        {
+            k = e-&gt;adjvex;
+            if (!(--GL-&gt;adjList[k].in))
+                stack[++top] = k;
+            /* 求各顶点事件最早发生时间值 */
+            if ((etv[gettop] + e-&gt;weight) &gt; etv[k])           
+                etv[k] = etv[gettop] + e-&gt;weight;
+        }
+    }
+    if (count &lt; GL-&gt;numVertexes)
+        return ERROR;
+    else
+        return OK;
+}
+</pre>
+
+  <p>代码中，除加粗部分外，与前面讲的拓扑排序算法没有什么不同。</p>
+
+  <p>第11～15行为初始化全局变量etv数组、top2和stack2的过程。第21行就是将本是要输出的拓扑序列压入全局栈stack2中。第27～28行很关键，它是求etv数组的每一个元素的值。比如说，假如我们已经求得顶点v<sub>0</sub>对应的etv[0]=0，顶点v<sub>1</sub>对应的etv[1]=3，顶点v<sub>2</sub>对应的etv[2]=4，现在我们需要求顶点v<sub>3</sub>对应的etv[3]，其实就是求etv[1]+len&lt;v<sub>1</sub>,v<sub>3</sub>&gt;与etv[2]+len&lt;v<sub>2</sub>,v<sub>3</sub>&gt;的较大值。显然3+5&lt;4+8，得到etv[3]=12，如图7-9-5所示。在代码中e-&gt;weight就是当前弧的长度。</p>
+
+  <p><img alt="" src="../Images/7-9-5.jpg" /></p>
+
+  <p>图7-9-5</p>
+
+  <p>由此我们也可以得出计算顶点v<sub>k</sub>即求etv[k]的最早发生时间的公式是：</p>
+
+  <p>其中P[K]表示所有到达顶点v<sub>k</sub>的弧的集合。比如图7-9-5的P[3]就是&lt;v<sub>1</sub>,v<sub>3</sub>&gt;和&lt;v<sub>2</sub>,v<sub>3</sub>&gt;两条弧。len&lt;v<sub>i</sub>,v<sub>k</sub>&gt;是弧&lt;v<sub>i</sub>,v<sub>k</sub>&gt;上的权值。</p>
+
+  <p>下面我们来看求关键路径的算法代码。</p>
+  <pre>
+/* 求关键路径，GL为有向网，输出GL的各项关键活动 */
+void CriticalPath(GraphAdjList GL)
+{
+    EdgeNode *e;
+    int i, gettop, k, j;
+    /* 声明活动最早发生时间和最迟发生时间变量 */
+    int ete, lte;                                          
+    /* 求拓扑序列，计算数组etv和stack2的值 */
+    TopologicalSort(GL);                                   
+    /* 事件最晚发生时间 */
+    ltv = (int *)malloc(GL-&gt;numVertexes * sizeof(int));    
+    for (i = 0; i &lt; GL-&gt;numVertexes; i++)
+        /* 初始化ltv */
+        ltv[i] = etv[GL-&gt;numVertexes - 1];                 
+    /* 计算ltv */
+    while (top2 != 0)                                      
+    {
+        /* 将拓扑序列出栈，后进先出 */
+        gettop = stack2[top2--];                           
+        for (e = GL-&gt;adjList[gettop].firstedge; e; e = e-&gt;next)
+        {                                                  
+            /* 求各顶点事件的最迟发生时间ltv值 */
+            k = e-&gt;adjvex;
+            /* 求各顶点事件最晚发生时间ltv */
+            if (ltv[k] - e-&gt;weight &lt; ltv[gettop])          
+                ltv[gettop] = ltv[k] - e-&gt;weight;
+        }
+    }
+    /* 求ete，lte和关键活动 */
+    for (j = 0; j &lt; GL-&gt;numVertexes; j++)                  
+    {
+        for (e = GL-&gt;adjList[j].firstedge; e; e = e-&gt;next)
+        {
+            k = e-&gt;adjvex;
+            /* 活动最早发生时间 */
+            ete = etv[j];                                  
+            /* 活动最迟发生时间 */
+            lte = ltv[k] - e-&gt;weight;                      
+            * 两者相等即在关键路径上 */
+            if (ete == lte)                                /
+                printf("&lt;v%d,v%d&gt; length: %d , ",
+                    GL-&gt;adjList[j].data, GL-&gt;adjList[k].data, e-&gt;weight);
+        }
+    }
+}
+</pre>
+
+  <p>1．程序开始执行。第5行，声明了ete和lte两个活动最早最晚发生时间变量。</p>
+
+  <p>2．第6行，调用求拓扑序列的函数。执行完毕后，全局变量数组etv和栈stack的值如图7-9-6所示，top2=10。也就是说，对于每个事件的最早发生时间，我们已经计算出来了。</p>
+
+  <p><img alt="" src="../Images/7-9-6.jpg" /></p>
+
+  <p>图7-9-6</p>
+
+  <p>3．第7～9行为初始化全局变量ltv数组，因为etv[9]=27，所以数组ltv当前的值为：{27,27,27,27,27,27,27,27,27,27}</p>
+
+  <p>4．第10～19行为计算ltv的循环。第12行，先将stack2的栈头出栈，由后进先出得到gettop=9。根据邻接表中，v<sub>9</sub>没有弧表，所以第13～18行循环体未执行。</p>
+
+  <p>5．再次来到第12行，gettop=8，在第13～18行的循环中，v<sub>8</sub>的弧表只有一条&lt;v<sub>8</sub>,v<sub>9</sub>&gt;，第15行得到k=9，因为ltv[9]-3&lt;ltv[8]，所以ltv[8]=ltv[9]-3=24，如图7-9-7所示。</p>
+
+  <p><img alt="" src="../Images/7-9-7.jpg" /></p>
+
+  <p>图7-9-7</p>
+
+  <p>6．再次循环，当gettop=7、5、6时，同理可算出ltv相对应的值为19、13、25，此时ltv值为：{27，27，27，27，27，13，25，19，24，27}</p>
+
+  <p>7．当gettop=4时，由邻接表可得到v<sub>4</sub>有两条弧&lt;v<sub>4</sub>,v<sub>6</sub>&gt;、&lt;v<sub>4</sub>,v<sub>7</sub>&gt;，通过第13～18行的循环，可以得到ltv[4]=min(ltv[7]-4,ltv[6]-9)=min(19-4,25-9)=15，如图7-9-8所示。</p>
+
+  <p><img alt="" src="../Images/7-9-8.jpg" /></p>
+
+  <p>图7-9-8</p>
+
+  <p>此时你应该发现，我们在计算ltv时，其实是把拓扑序列倒过来进行的。因此我们可以得出计算顶点vk即求ltv[k]的最晚发生时间的公式是：</p>
+
+  <p><img alt="" src="../Images/7-0-4.jpg" /></p>
+
+  <p>其中S[K]表示所有从顶点v<sub>k</sub>出发的弧的集合。比如图7-9-8的S[4]就是&lt;v<sub>4</sub>,v<sub>6</sub>&gt;和&lt;v<sub>4</sub>,v<sub>7</sub>&gt;两条弧，en&lt;v<sub>k</sub>,v<sub>j</sub>&gt;是弧&lt;v<sub>k</sub>,v<sub>j</sub>&gt;上的权值。</p>
+
+  <p>就这样，当程序执行到第20行时，相关变量的值如图7-9-9所示，比如etv[1]=3而ltv[1]=7，表示的意思就是如果时间单位是天的话，哪怕v<sub>1</sub>这个事件在第7天才开始，也可以保证整个工程的按期完成，你可以提前v<sub>1</sub>事件开始时间，但你最早也只能在第3天开始。跟我们前面举的例子，是先完成作业再玩还是先玩最后完成作业一个道理。</p>
+
+  <p><img alt="" src="../Images/7-9-9.jpg" /></p>
+
+  <p>图7-9-9</p>
+
+  <p>8．第20～31行是来求另两个变量活动最早开始时间ete和活动最晚开始时间lte，并对相同下标的它们做比较。两重循环嵌套是对邻接表的顶点和每个顶点的弧表遍历。</p>
+
+  <p>9．当j=0时，从v<sub>0</sub>点开始，有&lt;v<sub>0</sub>,v<sub>2</sub>&gt;和&lt;v<sub>0</sub>,v<sub>1</sub>&gt;两条弧。当k=2时，ete=etv[j]=etv[0]=0。lte=ltv[k]-e-&gt;weight=ltv[2]-len&lt;v<sub>0</sub>,v<sub>2</sub>&gt;=4-4=0，此时ete=lte，表示弧&lt;v<sub>0</sub>,v<sub>2</sub>&gt;是关键活动，因此打印。当k=1时，ete=etv[j]=etv[0]=0。lte=ltv[k]-e-&gt;weight=ltv[1]-len&lt;v<sub>0</sub>,v<sub>1</sub>&gt;=7-3=4，此时ete≠lte，因此&lt;v<sub>0</sub>,v<sub>1</sub>&gt;并不是关键活动，如图7-9-10所示。</p>
+
+  <p><img alt="" src="../Images/7-9-10.jpg" /></p>
+
+  <p>图7-9-10</p>
+
+  <p>这里需要解释一下，ete本来是表示活动&lt;v<sub>k</sub>,v<sub>j</sub>&gt;的最早开工时间，是针对弧来说的。但只有此弧的弧尾顶点v<sub>k</sub>的事件发生了，它才可以开始，因此ete=etv[k]。</p>
+
+  <p>而lte表示的是活动&lt;v<sub>k</sub>,v<sub>j</sub>&gt;的最晚开工时间，但此活动再晚也不能等v<sub>j</sub>事件发生才开始，而必须要在v<sub>j</sub>事件之前发生，所以lte=ltv[j]-len&lt;v<sub>k</sub>,v<sub>j</sub>&gt;。就像你晚上23点睡觉，你不能说到23点才开始做作业，而必须要提前2小时，在21点开始，才有可能按时完成作业。</p>
+
+  <p>所以最终，其实就是判断ete与lte是否相等，相等意味着活动没有任何空闲，是关键活动，否则就不是。10．j=1一直到j=9为止，做法是完全相同的，关键路径打印结果为“&lt;v<sub>0</sub>,v<sub>2</sub>&gt;4,&lt;v<sub>2</sub>,v<sub>3</sub>&gt;8,&lt;v<sub>3</sub>,v<sub>4</sub>&gt;3,&lt;v<sub>4</sub>,v<sub>7</sub>&gt;4,&lt;v<sub>7</sub>,v<sub>8</sub>&gt;5,&lt;v<sub>8</sub>,v<sub>9</sub>&gt;3,”，最终关键路径如图7-9-11所示。</p>
+
+  <p><img alt="" src="../Images/7-9-11.jpg" /></p>
+
+  <p>图7-9-11</p>
+
+  <p>分析整个求关键路径的算法，第6行是拓扑排序，时间复杂度为O(n+e)，第8～9行时间复杂度为O(n)，第10～19行时间复杂度为O(n+e)，第20～31行时间复杂也为O(n+e)，根据我们对时间复杂度的定义，所有的常数系数可以忽略，所以最终求关键路径算法的时间复杂度依然是O(n+e)。</p>
+
+  <p>实践证明，通过这样的算法对于工程的前期工期估算和中期的计划调整都有很大的帮助。不过注意，本例是唯一一条关键路径，这并不等于不存在多条关键路径的有向无环图。如果是多条关键路径，则单是提高一条关键路径上的关键活动的速度并不能导致整个工程缩短工期，而必须提高同时在几条关键路径上的活动的速度。这就像仅仅是有事业的成功，而没有健康的身体以及快乐的生活，是根本谈不上幸福的人生一样，三者缺一不可。</p>
+</body>
+</html>

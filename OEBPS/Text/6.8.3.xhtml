@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="6-8-3-">6.8.3　前序遍历算法</h3>
+
+  <p>二叉树的定义是用递归的方式，所以，实现遍历算法也可以采用递归，而且极其简洁明了。先来看看二叉树的前序遍历算法。代码如下：</p>
+  <pre>
+/* 二叉树的前序遍历递归算法 */
+void PreOrderTraverse(BiTree T)
+{
+    if (T == NULL)
+        return;
+    /* 显示结点数据，可以更改为其他对结点操作 */
+    printf("%c", T-&gt;data);          
+    /* 再先序遍历左子树 */
+    PreOrderTraverse(T-&gt;lchild);    
+    /* 最后先序遍历右子树 */
+    PreOrderTraverse(T-&gt;rchild);    
+}
+</pre>
+
+  <p>假设我们现在有如图6-8-6这样一棵二叉树T。这树已经用二叉链表结构存储在内存当中。</p>
+
+  <p><img alt="" src="../Images/6-8-6.jpg" /></p>
+
+  <p>图6-8-6</p>
+
+  <p>那么当调用PreOrderTraverse(T)函数时，我们来看看程序是如何运行的。</p>
+
+  <p>1．调用PreOrderTraverse(T)，T根结点不为null，所以执行printf，打印字母A，如图6-8-7所示。</p>
+
+  <p><img alt="" src="../Images/6-8-7.jpg" /></p>
+
+  <p>图6-8-7</p>
+
+  <p>2．调用PreOrderTraverse(T-&gt;lchild);访问了A结点的左孩子，不为null，执行printf显示字母B，如图6-8-8所示。</p>
+
+  <p><img alt="" src="../Images/6-8-8.jpg" /></p>
+
+  <p>图6-8-8</p>
+
+  <p>3．此时再次递归调用PreOrderTraverse(T-&gt;lchild);访问了B结点的左孩子，执行printf显示字母D，如图6-8-9所示。</p>
+
+  <p><img alt="" src="../Images/6-8-9.jpg" /></p>
+
+  <p>图6-8-9</p>
+
+  <p>4．再次递归调用PreOrderTraverse(T-&gt;lchild);访问了D结点的左孩子，执行printf显示字母H，如图6-8-10所示。</p>
+
+  <p><img alt="" src="../Images/6-8-10.jpg" /></p>
+
+  <p>图6-8-10</p>
+
+  <p>5．再次递归调用PreOrderTraverse(T-&gt;lchild);访问了H结点的左孩子，此时因为H结点无左孩子，所以T==null，返回此函数，此时递归调用PreOrderTraverse(T-&gt;rchild);访问了H结点的右孩子，printf显示字母K，如图6-8-11所示。</p>
+
+  <p><img alt="" src="../Images/6-8-11.jpg" /></p>
+
+  <p>图6-8-11</p>
+
+  <p>6．再次递归调用PreOrderTraverse(T-&gt;lchild);访问了K结点的左孩子，K结点无左孩子，返回，调用PreOrderTra-verse(T-&gt;rchild);访问了K结点的右孩子，也是null，返回。于是此函数执行完毕，返回到上一级递归的函数（即打印H结点时的函数），也执行完毕，返回到打印结点D时的函数，调用PreOrderTraverse(T-&gt;rchild);访问了D结点的右孩子，不存在，返回到B结点，调用PreOrderTra-verse(T-&gt;rchild);找到了结点E，打印字母E，如图6-8-12所示。</p>
+
+  <p><img alt="" src="../Images/6-8-12.jpg" /></p>
+
+  <p>图6-8-12</p>
+
+  <p>7．由于结点E没有左右孩子，返回打印结点B时的递归函数，递归执行完毕，返回到最初的PreOrderTraverse，调用PreOrderTra-verse(T-&gt;rchild);访问结点A的右孩子，打印字母C，如图6-8-13所示。</p>
+
+  <p><img alt="" src="../Images/6-8-13.jpg" /></p>
+
+  <p>图6-8-13</p>
+
+  <p>8．之后类似前面的递归调用，依次继续打印F、I、G、J，步骤略。</p>
+
+  <p>综上，前序遍历这棵二叉树的节点顺序是：AB-DHKECFIGJ。Traverse(T)函数时，程序是如何运行的。</p>
+</body>
+</html>

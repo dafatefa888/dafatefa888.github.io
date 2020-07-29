@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="5-7-4-kmp-">5.7.4　KMP模式匹配算法改进</h3>
+
+  <p>后来有人发现，KMP还是有缺陷的。比如，如果我们的主串S="aaaabcde"，子串T="aaaaax"，其next数组值分别为012345，在开始时，当i=5、j=5时，我们发现“b”与“a”不相等，如图5-7-6的①，因此j=next[5]=4，如图中的②，此时“b”与第4位置的“a”依然不等，j=next[4]=3，如图中的③，后依次是④⑤，直到j=next[1]=0时，根据算法，此时i++、j++，得到i=6、j=1，如图中的⑥。</p>
+
+  <p><img alt="" src="../Images/5-7-6.jpg" /></p>
+
+  <p>图5-7-6</p>
+
+  <p>我们发现，当中的②③④⑤步骤，其实是多余的判断。由于T串的第二、三、四、五位置的字符都与首位的“a”相等，那么可以用首位next[1]的值去取代与它相等的字符后续next[j]的值，这是个很好的办法。因此我们对求next函数进行了改良。</p>
+
+  <p>假设取代的数组为nextval，增加了加粗部分，代码如下：</p>
+  <pre>
+/* 求模式串T的next函数修正值并存入数组
+nextval */
+void get_nextval(String T, int *nextval)
+{
+    int i, j;
+    i = 1;
+    j = 0;
+    nextval[1] = 0;
+    /* 此处T[0]表示串T的长度 */
+    while (i &lt; T[0])                        
+    {
+        /* T[i]表示后缀的单个字符， */
+        /* T[j]表示前缀的单个字符 */
+        if (j == 0 || T[i] == T[j])         
+        {
+            ++i;
+            ++j;
+            /* 若当前字符与前缀字符不同 */
+            if (T[i] != T[j])               
+                /* 则当前的j为nextval在i位置的值 */
+                nextval[i] = j;             
+            else
+                /* 如果与前缀字符相同，则将前缀 */
+                /* 字符的nextval值赋值给nextval在i位置的值 */
+                nextval[i] = nextval[j];    
+
+        }
+        else
+            /* 若字符不相同，则j值回溯 */
+            j = nextval[j];                 
+    }
+}
+</pre>
+
+  <p>实际匹配算法，只需要将“get_next(T,next);”改为“get_nextval(T,next);”即可，这里不再重复。</p>
+</body>
+</html>

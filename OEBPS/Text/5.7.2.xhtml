@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="5-7-2-next-">5.7.2　next数组值推导</h3>
+
+  <p>具体如何推导出一个串的next数组值呢，我们来看一些例子。</p>
+
+  <p>1．T="abcdex"（如表5-7-1所示）</p>
+
+  <p>表5-7-1</p>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>j</td>
+
+        <td>123456</td>
+      </tr>
+
+      <tr>
+        <td>模式串T</td>
+
+        <td>abcdex</td>
+      </tr>
+
+      <tr>
+        <td>next[j]</td>
+
+        <td>011111</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>1）当j=1时，next[1]=0；</p>
+
+  <p>2）当j=2时，j由1到j-1就只有字符“a”，属于其他情况next[2]=1；</p>
+
+  <p>3）当j=3时，j由1到j-1串是“ab”，显然“a”与“b”不相等，属其他情况，next[3]=1；</p>
+
+  <p>4）以后同理，所以最终此T串的next[j]为011111。</p>
+
+  <p>2．T="abcabx"（如表5-7-2所示）</p>
+
+  <p>表5-7-2</p>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>j</td>
+
+        <td>123456</td>
+      </tr>
+
+      <tr>
+        <td>模式串T</td>
+
+        <td>abcabx</td>
+      </tr>
+
+      <tr>
+        <td>next[j]</td>
+
+        <td>011123</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>1）当j=1时，next[1]=0；</p>
+
+  <p>2）当j=2时，同上例说明，next[2]=1；</p>
+
+  <p>3）当j=3时，同上，next[3]=1；</p>
+
+  <p>4）当j=4时，同上，next[4]=1；</p>
+
+  <p>5）当j=5时，此时j由1到j-1的串是“abca”，前缀字符“a”与后缀字符“a”相等（前缀用下划线表示，后缀用斜体表示），因此可推算出k值为2（由‘p<sub>1</sub>...p<sub>k-1</sub>’=‘p<sub>j-k＋1</sub>...p<sub>j-1</sub>’，得到p<sub>1</sub>=p<sub>4</sub>）因此next[5]=2；</p>
+
+  <p>6）当j=6时，j由1到j-1的串是“abcab”，由于前缀字符“ab”与后缀“ab”相等，所以next[6]=3。</p>
+
+  <p>我们可以根据经验得到如果前后缀一个字符相等，k值是2，两个字符k值是3，n个相等k值就是n+1。</p>
+
+  <p>3．T="ababaaaba"（如表5-7-3所示）</p>
+
+  <p>表5-7-3</p>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>j</td>
+
+        <td>123456789</td>
+      </tr>
+
+      <tr>
+        <td>模式串T</td>
+
+        <td>ababaaaba</td>
+      </tr>
+
+      <tr>
+        <td>next[j]</td>
+
+        <td>011234223</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>1）当j=1时，next[1]=0；</p>
+
+  <p>2）当j=2时，同上next[2]=1；</p>
+
+  <p>3）当j=3时，同上next[3]=1；</p>
+
+  <p>4）当j=4时，j由1到j-1的串是“aba”，前缀字符“a”与后缀字符“a”相等，next[4]=2；</p>
+
+  <p>5）当j=5时，j由1到j-1的串是“abab”，由于前缀字符“ab”与后缀“ab”相等，所以next[5]=3；</p>
+
+  <p>6）当j=6时，j由1到j-1的串是“ababa”，由于前缀字符“aba”与后缀“aba”相等，所以next[6]=4；</p>
+
+  <p>7）当j=7时，j由1到j-1的串是“ababaa”，由于前缀字符“ab”与后缀“aa”并不相等，只有“a”相等，所以next[7]=2；</p>
+
+  <p>8）当j=8时，j由1到j-1的串是“ababaaa”，只有“a”相等，所以next[8]=2；</p>
+
+  <p>9）当j=9时，j由1到j-1的串是“ababaaab”，由于前缀字符“ab”与后缀“ab”相等，所以next[9]=3。</p>
+
+  <p>4．T="aaaaaaaab"（如表5-7-4所示）</p>
+
+  <p>表5-7-4</p>
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>j</td>
+
+        <td>123456789</td>
+      </tr>
+
+      <tr>
+        <td>模式串T</td>
+
+        <td>aaaaaaaab</td>
+      </tr>
+
+      <tr>
+        <td>next[j]</td>
+
+        <td>012345678</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>1）当j=1时，next[1]=0；</p>
+
+  <p>2）当j=2时，同上next[2]=1；</p>
+
+  <p>3）当j=3时，j由1到j-1的串是“aa”，前缀字符“a”与后缀字符“a”相等，next[3]=2；</p>
+
+  <p>4）当j=4时，j由1到j-1的串是“aaa”，由于前缀字符“aa”与后缀“aa”相等，所以next[4]=3；</p>
+
+  <p>5）……</p>
+
+  <p>6）当j=9时，j由1到j-1的串是“aaaaaaaa”，由于前缀字符“aaaaaaa”与后缀“aaaaaaa”相等，所以next[9]=8。</p>
+</body>
+</html>

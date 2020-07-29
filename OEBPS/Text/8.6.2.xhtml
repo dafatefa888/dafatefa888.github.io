@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="8-6-2-">8.6.2　二叉排序树插入操作</h3>
+
+  <p>有了二叉排序树的查找函数，那么所谓的二叉排序树的插入，其实也就是将关键字放到树中的合适位置而已，来看代码。</p>
+  <pre>
+/* 当二叉排序树T中不存在关键字等于key的数据元
+   素时， */
+/* 插入key并返回TRUE，否则返回FALSE */
+Status InsertBST(BiTree *T, int key)
+{
+    BiTree p, s;
+    /* 查找不成功 */
+    if (!SearchBST(*T, key, NULL, &amp;p))    
+    {
+        s = (BiTree)malloc(sizeof(BiTNode));
+        s-&gt;data = key;
+        s-&gt;lchild = s-&gt;rchild = NULL;
+        if (!p)
+            /* 插入s为新的根结点 */
+            *T = s;                       
+        else if (key &lt; p-&gt;data)
+            /* 插入s为左孩子 */
+            p-&gt;lchild = s;                
+        else
+            /* 插入s为右孩子 */
+            p-&gt;rchild = s;                
+        return TRUE;
+    }
+    else
+        /* 树中已有关键字相同的结点，不再插入 */
+        return FALSE;                     
+}
+</pre>
+
+  <p>这段代码非常简单。如果你调用函数是“In-sertBST(&amp;T,93);”，那么结果就是FALSE，如果是“InsertBST(&amp;T,95);”，那么一定就是在93的结点增加一个右孩子95，并且返回True。如图8-6-7所示。</p>
+
+  <p><img alt="" src="../Images/8-6-7.jpg" /></p>
+
+  <p>图8-6-7</p>
+
+  <p>有了二叉排序树的插入代码，我们要实现二叉排序树的构建就非常容易了。下面的代码就可以创建一棵图8-6-3这样的树。</p>
+  <pre>
+int i;
+int a[10] = { 62, 88, 58, 47, 35, 73, 51, 
+              99, 37, 93 };
+BiTree T = NULL;
+for (i = 0; i &lt; 10; i++)
+{
+    InsertBST(&amp;T, a[i]);
+}
+</pre>
+
+  <p>在你的大脑里，是否已经有一幅随着循环语句的运行逐步生成这棵二叉排序树的动画图案呢？如果不能，那只能说明你还没真理解它的原理哦。</p>
+</body>
+</html>

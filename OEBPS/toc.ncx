@@ -1,0 +1,1780 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN"
+ "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+  <head>
+    <meta name="dtb:uid" content="urn:uuid:ae717342-db21-4145-bd6b-bc589b4e2136" />
+    <meta name="dtb:depth" content="3" />
+    <meta name="dtb:totalPageCount" content="0" />
+    <meta name="dtb:maxPageNumber" content="0" />
+  </head>
+  <docTitle>
+    <text>大话数据结构</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint-1" playOrder="1">
+      <navLabel>
+        <text>前言</text>
+      </navLabel>
+      <content src="Text/i.xhtml" />
+    </navPoint>
+    <navPoint id="navPoint-2" playOrder="2">
+      <navLabel>
+        <text>编者的话</text>
+      </navLabel>
+      <content src="Text/ii.xhtml" />
+    </navPoint>
+    <navPoint id="navPoint-3" playOrder="3">
+      <navLabel>
+        <text>第1章 数据结构绪论</text>
+      </navLabel>
+      <content src="Text/1.xhtml" />
+      <navPoint id="navPoint-4" playOrder="4">
+        <navLabel>
+          <text>1.1 开场白</text>
+        </navLabel>
+        <content src="Text/1.1.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-5" playOrder="5">
+        <navLabel>
+          <text>1.2 你数据结构怎么学的？</text>
+        </navLabel>
+        <content src="Text/1.2.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-6" playOrder="6">
+        <navLabel>
+          <text>1.3 数据结构起源</text>
+        </navLabel>
+        <content src="Text/1.3.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-7" playOrder="7">
+        <navLabel>
+          <text>1.4 基本概念和术语</text>
+        </navLabel>
+        <content src="Text/1.4.xhtml" />
+        <navPoint id="navPoint-8" playOrder="8">
+          <navLabel>
+            <text>1.4.1 数据</text>
+          </navLabel>
+          <content src="Text/1.4.xhtml#1-4-1-" />
+        </navPoint>
+        <navPoint id="navPoint-9" playOrder="9">
+          <navLabel>
+            <text>1.4.2 数据元素</text>
+          </navLabel>
+          <content src="Text/1.4.xhtml#1-4-2-" />
+        </navPoint>
+        <navPoint id="navPoint-10" playOrder="10">
+          <navLabel>
+            <text>1.4.3 数据项</text>
+          </navLabel>
+          <content src="Text/1.4.xhtml#1-4-3-" />
+        </navPoint>
+        <navPoint id="navPoint-11" playOrder="11">
+          <navLabel>
+            <text>1.4.4 数据对象</text>
+          </navLabel>
+          <content src="Text/1.4.xhtml#1-4-4-" />
+        </navPoint>
+        <navPoint id="navPoint-12" playOrder="12">
+          <navLabel>
+            <text>1.4.5 数据结构</text>
+          </navLabel>
+          <content src="Text/1.4.xhtml#1-4-5-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-13" playOrder="13">
+        <navLabel>
+          <text>1.5 逻辑结构与物理结构</text>
+        </navLabel>
+        <content src="Text/1.5.xhtml" />
+        <navPoint id="navPoint-14" playOrder="14">
+          <navLabel>
+            <text>1.5.1 逻辑结构</text>
+          </navLabel>
+          <content src="Text/1.5.xhtml#1-5-1-" />
+        </navPoint>
+        <navPoint id="navPoint-15" playOrder="15">
+          <navLabel>
+            <text>1.5.2 物理结构</text>
+          </navLabel>
+          <content src="Text/1.5.xhtml#1-5-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-16" playOrder="16">
+        <navLabel>
+          <text>1.6 抽象数据类型</text>
+        </navLabel>
+        <content src="Text/1.6.xhtml" />
+        <navPoint id="navPoint-17" playOrder="17">
+          <navLabel>
+            <text>1.6.1 数据类型</text>
+          </navLabel>
+          <content src="Text/1.6.xhtml#1-6-1-" />
+        </navPoint>
+        <navPoint id="navPoint-18" playOrder="18">
+          <navLabel>
+            <text>1.6.2 抽象数据类型</text>
+          </navLabel>
+          <content src="Text/1.6.xhtml#1-6-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-19" playOrder="19">
+        <navLabel>
+          <text>1.7 总结回顾</text>
+        </navLabel>
+        <content src="Text/1.7.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-20" playOrder="20">
+        <navLabel>
+          <text>1.8 结尾语</text>
+        </navLabel>
+        <content src="Text/1.8.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-21" playOrder="21">
+      <navLabel>
+        <text>第2章 算法</text>
+      </navLabel>
+      <content src="Text/2.xhtml" />
+      <navPoint id="navPoint-22" playOrder="22">
+        <navLabel>
+          <text>2.1 开场白</text>
+        </navLabel>
+        <content src="Text/2.1.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-23" playOrder="23">
+        <navLabel>
+          <text>2.2 数据结构与算法关系</text>
+        </navLabel>
+        <content src="Text/2.2.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-24" playOrder="24">
+        <navLabel>
+          <text>2.3 两种算法的比较</text>
+        </navLabel>
+        <content src="Text/2.3.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-25" playOrder="25">
+        <navLabel>
+          <text>2.4 算法定义</text>
+        </navLabel>
+        <content src="Text/2.4.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-26" playOrder="26">
+        <navLabel>
+          <text>2.5 算法的特性</text>
+        </navLabel>
+        <content src="Text/2.5.xhtml" />
+        <navPoint id="navPoint-27" playOrder="27">
+          <navLabel>
+            <text>2.5.1 输入输出</text>
+          </navLabel>
+          <content src="Text/2.5.xhtml#2-5-1-" />
+        </navPoint>
+        <navPoint id="navPoint-28" playOrder="28">
+          <navLabel>
+            <text>2.5.2 有穷性</text>
+          </navLabel>
+          <content src="Text/2.5.xhtml#2-5-2-" />
+        </navPoint>
+        <navPoint id="navPoint-29" playOrder="29">
+          <navLabel>
+            <text>2.5.3 确定性</text>
+          </navLabel>
+          <content src="Text/2.5.xhtml#2-5-3-" />
+        </navPoint>
+        <navPoint id="navPoint-30" playOrder="30">
+          <navLabel>
+            <text>2.5.4 可行性</text>
+          </navLabel>
+          <content src="Text/2.5.xhtml#2-5-4-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-31" playOrder="31">
+        <navLabel>
+          <text>2.6 算法设计的要求</text>
+        </navLabel>
+        <content src="Text/2.6.xhtml" />
+        <navPoint id="navPoint-32" playOrder="32">
+          <navLabel>
+            <text>2.6.1 正确性</text>
+          </navLabel>
+          <content src="Text/2.6.xhtml#2-6-1-" />
+        </navPoint>
+        <navPoint id="navPoint-33" playOrder="33">
+          <navLabel>
+            <text>2.6.2 可读性</text>
+          </navLabel>
+          <content src="Text/2.6.xhtml#2-6-2-" />
+        </navPoint>
+        <navPoint id="navPoint-34" playOrder="34">
+          <navLabel>
+            <text>2.6.3 健壮性</text>
+          </navLabel>
+          <content src="Text/2.6.xhtml#2-6-3-" />
+        </navPoint>
+        <navPoint id="navPoint-35" playOrder="35">
+          <navLabel>
+            <text>2.6.4 时间效率高和存储量低</text>
+          </navLabel>
+          <content src="Text/2.6.xhtml#2-6-4-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-36" playOrder="36">
+        <navLabel>
+          <text>2.7 算法效率的度量方法</text>
+        </navLabel>
+        <content src="Text/2.7.xhtml" />
+        <navPoint id="navPoint-37" playOrder="37">
+          <navLabel>
+            <text>2.7.1 事后统计方法</text>
+          </navLabel>
+          <content src="Text/2.7.xhtml#2-7-1-" />
+        </navPoint>
+        <navPoint id="navPoint-38" playOrder="38">
+          <navLabel>
+            <text>2.7.2 事前分析估算方法</text>
+          </navLabel>
+          <content src="Text/2.7.xhtml#2-7-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-39" playOrder="39">
+        <navLabel>
+          <text>2.8 函数的渐近增长</text>
+        </navLabel>
+        <content src="Text/2.8.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-40" playOrder="40">
+        <navLabel>
+          <text>2.9 算法时间复杂度</text>
+        </navLabel>
+        <content src="Text/2.9.xhtml" />
+        <navPoint id="navPoint-41" playOrder="41">
+          <navLabel>
+            <text>2.9.1 算法时间复杂度定义</text>
+          </navLabel>
+          <content src="Text/2.9.xhtml#2-9-1-" />
+        </navPoint>
+        <navPoint id="navPoint-42" playOrder="42">
+          <navLabel>
+            <text>2.9.2 推导大O阶方法</text>
+          </navLabel>
+          <content src="Text/2.9.xhtml#2-9-2-o-" />
+        </navPoint>
+        <navPoint id="navPoint-43" playOrder="43">
+          <navLabel>
+            <text>2.9.3 常数阶</text>
+          </navLabel>
+          <content src="Text/2.9.xhtml#2-9-3-" />
+        </navPoint>
+        <navPoint id="navPoint-44" playOrder="44">
+          <navLabel>
+            <text>2.9.4 线性阶</text>
+          </navLabel>
+          <content src="Text/2.9.xhtml#2-9-4-" />
+        </navPoint>
+        <navPoint id="navPoint-45" playOrder="45">
+          <navLabel>
+            <text>2.9.5 对数阶</text>
+          </navLabel>
+          <content src="Text/2.9.xhtml#2-9-5-" />
+        </navPoint>
+        <navPoint id="navPoint-46" playOrder="46">
+          <navLabel>
+            <text>2.9.6 平方阶</text>
+          </navLabel>
+          <content src="Text/2.9.xhtml#2-9-6-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-47" playOrder="47">
+        <navLabel>
+          <text>2.10 常见的时间复杂度</text>
+        </navLabel>
+        <content src="Text/2.10.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-48" playOrder="48">
+        <navLabel>
+          <text>2.11 最坏情况与平均情况</text>
+        </navLabel>
+        <content src="Text/2.11.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-49" playOrder="49">
+        <navLabel>
+          <text>2.12 算法空间复杂度</text>
+        </navLabel>
+        <content src="Text/2.12.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-50" playOrder="50">
+        <navLabel>
+          <text>2.13 总结回顾</text>
+        </navLabel>
+        <content src="Text/2.13.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-51" playOrder="51">
+        <navLabel>
+          <text>2.14 结尾语</text>
+        </navLabel>
+        <content src="Text/2.14.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-52" playOrder="52">
+      <navLabel>
+        <text>第3章 线性表</text>
+      </navLabel>
+      <content src="Text/3.xhtml" />
+      <navPoint id="navPoint-53" playOrder="53">
+        <navLabel>
+          <text>3.1 开场白</text>
+        </navLabel>
+        <content src="Text/3.1.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-54" playOrder="54">
+        <navLabel>
+          <text>3.2 线性表的定义</text>
+        </navLabel>
+        <content src="Text/3.2.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-55" playOrder="55">
+        <navLabel>
+          <text>3.3 线性表的抽象数据类型</text>
+        </navLabel>
+        <content src="Text/3.3.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-56" playOrder="56">
+        <navLabel>
+          <text>3.4 线性表的顺序存储结构</text>
+        </navLabel>
+        <content src="Text/3.4.xhtml" />
+        <navPoint id="navPoint-57" playOrder="57">
+          <navLabel>
+            <text>3.4.1 顺序存储定义</text>
+          </navLabel>
+          <content src="Text/3.4.xhtml#3-4-1-" />
+        </navPoint>
+        <navPoint id="navPoint-58" playOrder="58">
+          <navLabel>
+            <text>3.4.2 顺序存储方式</text>
+          </navLabel>
+          <content src="Text/3.4.xhtml#3-4-2-" />
+        </navPoint>
+        <navPoint id="navPoint-59" playOrder="59">
+          <navLabel>
+            <text>3.4.3 数组长度与线性表长度区别</text>
+          </navLabel>
+          <content src="Text/3.4.xhtml#3-4-3-" />
+        </navPoint>
+        <navPoint id="navPoint-60" playOrder="60">
+          <navLabel>
+            <text>3.4.4 地址计算方法</text>
+          </navLabel>
+          <content src="Text/3.4.xhtml#3-4-4-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-61" playOrder="61">
+        <navLabel>
+          <text>3.5 顺序存储结构的插入与删除</text>
+        </navLabel>
+        <content src="Text/3.5.xhtml" />
+        <navPoint id="navPoint-62" playOrder="62">
+          <navLabel>
+            <text>3.5.1 获得元素操作</text>
+          </navLabel>
+          <content src="Text/3.5.xhtml#3-5-1-" />
+        </navPoint>
+        <navPoint id="navPoint-63" playOrder="63">
+          <navLabel>
+            <text>3.5.2 插入操作</text>
+          </navLabel>
+          <content src="Text/3.5.xhtml#3-5-2-" />
+        </navPoint>
+        <navPoint id="navPoint-64" playOrder="64">
+          <navLabel>
+            <text>3.5.3 删除操作</text>
+          </navLabel>
+          <content src="Text/3.5.xhtml#3-5-3-" />
+        </navPoint>
+        <navPoint id="navPoint-65" playOrder="65">
+          <navLabel>
+            <text>3.5.4 线性表顺序存储结构的优缺点</text>
+          </navLabel>
+          <content src="Text/3.5.xhtml#3-5-4-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-66" playOrder="66">
+        <navLabel>
+          <text>3.6 线性表的链式存储结构</text>
+        </navLabel>
+        <content src="Text/3.6.xhtml" />
+        <navPoint id="navPoint-67" playOrder="67">
+          <navLabel>
+            <text>3.6.1 顺序存储结构不足的解决办法</text>
+          </navLabel>
+          <content src="Text/3.6.xhtml#3-6-1-" />
+        </navPoint>
+        <navPoint id="navPoint-68" playOrder="68">
+          <navLabel>
+            <text>3.6.2 线性表链式存储结构定义</text>
+          </navLabel>
+          <content src="Text/3.6.xhtml#3-6-2-" />
+        </navPoint>
+        <navPoint id="navPoint-69" playOrder="69">
+          <navLabel>
+            <text>3.6.3 头指针与头结点的异同</text>
+          </navLabel>
+          <content src="Text/3.6.xhtml#3-6-3-" />
+        </navPoint>
+        <navPoint id="navPoint-70" playOrder="70">
+          <navLabel>
+            <text>3.6.4 线性表链式存储结构代码描述</text>
+          </navLabel>
+          <content src="Text/3.6.xhtml#3-6-4-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-71" playOrder="71">
+        <navLabel>
+          <text>3.7 单链表的读取</text>
+        </navLabel>
+        <content src="Text/3.7.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-72" playOrder="72">
+        <navLabel>
+          <text>3.8 单链表的插入与删除</text>
+        </navLabel>
+        <content src="Text/3.8.xhtml" />
+        <navPoint id="navPoint-73" playOrder="73">
+          <navLabel>
+            <text>3.8.1 单链表的插入</text>
+          </navLabel>
+          <content src="Text/3.8.xhtml#3-8-1-" />
+        </navPoint>
+        <navPoint id="navPoint-74" playOrder="74">
+          <navLabel>
+            <text>3.8.2 单链表的删除</text>
+          </navLabel>
+          <content src="Text/3.8.xhtml#3-8-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-75" playOrder="75">
+        <navLabel>
+          <text>3.9 单链表的整表创建</text>
+        </navLabel>
+        <content src="Text/3.9.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-76" playOrder="76">
+        <navLabel>
+          <text>3.10 单链表的整表删除</text>
+        </navLabel>
+        <content src="Text/3.10.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-77" playOrder="77">
+        <navLabel>
+          <text>3.11 单链表结构与顺序存储结构优缺点</text>
+        </navLabel>
+        <content src="Text/3.11.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-78" playOrder="78">
+        <navLabel>
+          <text>3.12 静态链表</text>
+        </navLabel>
+        <content src="Text/3.12.xhtml" />
+        <navPoint id="navPoint-79" playOrder="79">
+          <navLabel>
+            <text>3.12.1 静态链表的插入操作</text>
+          </navLabel>
+          <content src="Text/3.12.xhtml#3-12-1-" />
+        </navPoint>
+        <navPoint id="navPoint-80" playOrder="80">
+          <navLabel>
+            <text>3.12.2 静态链表的删除操作</text>
+          </navLabel>
+          <content src="Text/3.12.xhtml#3-12-2-" />
+        </navPoint>
+        <navPoint id="navPoint-81" playOrder="81">
+          <navLabel>
+            <text>3.12.3 静态链表优缺点</text>
+          </navLabel>
+          <content src="Text/3.12.xhtml#3-12-3-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-82" playOrder="82">
+        <navLabel>
+          <text>3.13 循环链表</text>
+        </navLabel>
+        <content src="Text/3.13.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-83" playOrder="83">
+        <navLabel>
+          <text>3.14 双向链表</text>
+        </navLabel>
+        <content src="Text/3.14.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-84" playOrder="84">
+        <navLabel>
+          <text>3.15 总结回顾</text>
+        </navLabel>
+        <content src="Text/3.15.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-85" playOrder="85">
+        <navLabel>
+          <text>3.16 结尾语</text>
+        </navLabel>
+        <content src="Text/3.16.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-86" playOrder="86">
+      <navLabel>
+        <text>第4章 栈与队列</text>
+      </navLabel>
+      <content src="Text/4.xhtml" />
+      <navPoint id="navPoint-87" playOrder="87">
+        <navLabel>
+          <text>4.1 开场白</text>
+        </navLabel>
+        <content src="Text/4.1.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-88" playOrder="88">
+        <navLabel>
+          <text>4.2 栈的定义</text>
+        </navLabel>
+        <content src="Text/4.2.xhtml" />
+        <navPoint id="navPoint-89" playOrder="89">
+          <navLabel>
+            <text>4.2.1 栈的定义</text>
+          </navLabel>
+          <content src="Text/4.2.xhtml#4-2-1-" />
+        </navPoint>
+        <navPoint id="navPoint-90" playOrder="90">
+          <navLabel>
+            <text>4.2.2 进栈出栈变化形式</text>
+          </navLabel>
+          <content src="Text/4.2.xhtml#4-2-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-91" playOrder="91">
+        <navLabel>
+          <text>4.3 栈的抽象数据类型</text>
+        </navLabel>
+        <content src="Text/4.3.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-92" playOrder="92">
+        <navLabel>
+          <text>4.4 栈的顺序存储结构及实现</text>
+        </navLabel>
+        <content src="Text/4.4.xhtml" />
+        <navPoint id="navPoint-93" playOrder="93">
+          <navLabel>
+            <text>4.4.1 栈的顺序存储结构</text>
+          </navLabel>
+          <content src="Text/4.4.xhtml#4-4-1-" />
+        </navPoint>
+        <navPoint id="navPoint-94" playOrder="94">
+          <navLabel>
+            <text>4.4.2 栈的顺序存储结构——进栈操作</text>
+          </navLabel>
+          <content src="Text/4.4.xhtml#4-4-2-" />
+        </navPoint>
+        <navPoint id="navPoint-95" playOrder="95">
+          <navLabel>
+            <text>4.4.3 栈的顺序存储结构——出栈</text>
+          </navLabel>
+          <content src="Text/4.4.xhtml#4-4-3-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-96" playOrder="96">
+        <navLabel>
+          <text>4.5 两栈共享空间</text>
+        </navLabel>
+        <content src="Text/4.5.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-97" playOrder="97">
+        <navLabel>
+          <text>4.6 栈的链式存储结构及实现</text>
+        </navLabel>
+        <content src="Text/4.6.xhtml" />
+        <navPoint id="navPoint-98" playOrder="98">
+          <navLabel>
+            <text>4.6.1 栈的链式存储结构</text>
+          </navLabel>
+          <content src="Text/4.6.xhtml#4-6-1-" />
+        </navPoint>
+        <navPoint id="navPoint-99" playOrder="99">
+          <navLabel>
+            <text>4.6.2 栈的链式存储结构——进栈操作</text>
+          </navLabel>
+          <content src="Text/4.6.xhtml#4-6-2-" />
+        </navPoint>
+        <navPoint id="navPoint-100" playOrder="100">
+          <navLabel>
+            <text>4.6.3 栈的链式存储结构——出栈操作</text>
+          </navLabel>
+          <content src="Text/4.6.xhtml#4-6-3-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-101" playOrder="101">
+        <navLabel>
+          <text>4.7 栈的作用</text>
+        </navLabel>
+        <content src="Text/4.7.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-102" playOrder="102">
+        <navLabel>
+          <text>4.8 栈的应用——递归</text>
+        </navLabel>
+        <content src="Text/4.8.xhtml" />
+        <navPoint id="navPoint-103" playOrder="103">
+          <navLabel>
+            <text>4.8.1 斐波那契数列实现</text>
+          </navLabel>
+          <content src="Text/4.8.xhtml#4-8-1-" />
+        </navPoint>
+        <navPoint id="navPoint-104" playOrder="104">
+          <navLabel>
+            <text>4.8.2 递归定义</text>
+          </navLabel>
+          <content src="Text/4.8.xhtml#4-8-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-105" playOrder="105">
+        <navLabel>
+          <text>4.9 栈的应用——四则运算表达式求值</text>
+        </navLabel>
+        <content src="Text/4.9.xhtml" />
+        <navPoint id="navPoint-106" playOrder="106">
+          <navLabel>
+            <text>4.9.1 后缀（逆波兰）表示法定义</text>
+          </navLabel>
+          <content src="Text/4.9.xhtml#4-9-1-" />
+        </navPoint>
+        <navPoint id="navPoint-107" playOrder="107">
+          <navLabel>
+            <text>4.9.2 后缀表达式计算结果</text>
+          </navLabel>
+          <content src="Text/4.9.xhtml#4-9-2-" />
+        </navPoint>
+        <navPoint id="navPoint-108" playOrder="108">
+          <navLabel>
+            <text>4.9.3 中缀表达式转后缀表达式</text>
+          </navLabel>
+          <content src="Text/4.9.xhtml#4-9-3-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-109" playOrder="109">
+        <navLabel>
+          <text>4.10 队列的定义</text>
+        </navLabel>
+        <content src="Text/4.10.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-110" playOrder="110">
+        <navLabel>
+          <text>4.11 队列的抽象数据类型</text>
+        </navLabel>
+        <content src="Text/4.11.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-111" playOrder="111">
+        <navLabel>
+          <text>4.12 循环队列</text>
+        </navLabel>
+        <content src="Text/4.12.xhtml" />
+        <navPoint id="navPoint-112" playOrder="112">
+          <navLabel>
+            <text>4.12.1 队列顺序存储的不足</text>
+          </navLabel>
+          <content src="Text/4.12.xhtml#4-12-1-" />
+        </navPoint>
+        <navPoint id="navPoint-113" playOrder="113">
+          <navLabel>
+            <text>4.12.2 循环队列定义</text>
+          </navLabel>
+          <content src="Text/4.12.xhtml#4-12-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-114" playOrder="114">
+        <navLabel>
+          <text>4.13 队列的链式存储结构及实现</text>
+        </navLabel>
+        <content src="Text/4.13.xhtml" />
+        <navPoint id="navPoint-115" playOrder="115">
+          <navLabel>
+            <text>4.13.1 队列的链式存储结构——入队操作</text>
+          </navLabel>
+          <content src="Text/4.13.xhtml#4-13-1-" />
+        </navPoint>
+        <navPoint id="navPoint-116" playOrder="116">
+          <navLabel>
+            <text>4.13.2 队列的链式存储结构——出队操作</text>
+          </navLabel>
+          <content src="Text/4.13.xhtml#4-13-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-117" playOrder="117">
+        <navLabel>
+          <text>4.14 总结回顾</text>
+        </navLabel>
+        <content src="Text/4.14.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-118" playOrder="118">
+        <navLabel>
+          <text>4.15 结尾语</text>
+        </navLabel>
+        <content src="Text/4.15.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-119" playOrder="119">
+      <navLabel>
+        <text>第5章 串</text>
+      </navLabel>
+      <content src="Text/5.xhtml" />
+      <navPoint id="navPoint-120" playOrder="120">
+        <navLabel>
+          <text>5.1 开场白</text>
+        </navLabel>
+        <content src="Text/5.1.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-121" playOrder="121">
+        <navLabel>
+          <text>5.2 串的定义</text>
+        </navLabel>
+        <content src="Text/5.2.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-122" playOrder="122">
+        <navLabel>
+          <text>5.3 串的比较</text>
+        </navLabel>
+        <content src="Text/5.3.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-123" playOrder="123">
+        <navLabel>
+          <text>5.4 串的抽象数据类型</text>
+        </navLabel>
+        <content src="Text/5.4.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-124" playOrder="124">
+        <navLabel>
+          <text>5.5 串的存储结构</text>
+        </navLabel>
+        <content src="Text/5.5.xhtml" />
+        <navPoint id="navPoint-125" playOrder="125">
+          <navLabel>
+            <text>5.5.1 串的顺序存储结构</text>
+          </navLabel>
+          <content src="Text/5.5.xhtml#5-5-1-" />
+        </navPoint>
+        <navPoint id="navPoint-126" playOrder="126">
+          <navLabel>
+            <text>5.5.2 串的链式存储结构</text>
+          </navLabel>
+          <content src="Text/5.5.xhtml#5-5-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-127" playOrder="127">
+        <navLabel>
+          <text>5.6 朴素的模式匹配算法</text>
+        </navLabel>
+        <content src="Text/5.6.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-128" playOrder="128">
+        <navLabel>
+          <text>5.7 KMP模式匹配算法</text>
+        </navLabel>
+        <content src="Text/5.7.xhtml" />
+        <navPoint id="navPoint-129" playOrder="129">
+          <navLabel>
+            <text>5.7.1 KMP模式匹配算法原理</text>
+          </navLabel>
+          <content src="Text/5.7.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-130" playOrder="130">
+          <navLabel>
+            <text>5.7.2 next数组值推导</text>
+          </navLabel>
+          <content src="Text/5.7.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-131" playOrder="131">
+          <navLabel>
+            <text>5.7.3 KMP模式匹配算法实现</text>
+          </navLabel>
+          <content src="Text/5.7.3.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-132" playOrder="132">
+          <navLabel>
+            <text>5.7.4 KMP模式匹配算法改进</text>
+          </navLabel>
+          <content src="Text/5.7.4.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-133" playOrder="133">
+          <navLabel>
+            <text>5.7.5 nextval数组值推导</text>
+          </navLabel>
+          <content src="Text/5.7.5.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-134" playOrder="134">
+        <navLabel>
+          <text>5.8 总结回顾</text>
+        </navLabel>
+        <content src="Text/5.8.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-135" playOrder="135">
+        <navLabel>
+          <text>5.9 结尾语</text>
+        </navLabel>
+        <content src="Text/5.9.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-136" playOrder="136">
+      <navLabel>
+        <text>第6章 树</text>
+      </navLabel>
+      <content src="Text/6.xhtml" />
+      <navPoint id="navPoint-137" playOrder="137">
+        <navLabel>
+          <text>6.1 开场白</text>
+        </navLabel>
+        <content src="Text/6.1.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-138" playOrder="138">
+        <navLabel>
+          <text>6.2 树的定义</text>
+        </navLabel>
+        <content src="Text/6.2.xhtml" />
+        <navPoint id="navPoint-139" playOrder="139">
+          <navLabel>
+            <text>6.2.1 结点分类</text>
+          </navLabel>
+          <content src="Text/6.2.xhtml#6-2-1-" />
+        </navPoint>
+        <navPoint id="navPoint-140" playOrder="140">
+          <navLabel>
+            <text>6.2.2 结点间关系</text>
+          </navLabel>
+          <content src="Text/6.2.xhtml#6-2-2-" />
+        </navPoint>
+        <navPoint id="navPoint-141" playOrder="141">
+          <navLabel>
+            <text>6.2.3 树的其他相关概念</text>
+          </navLabel>
+          <content src="Text/6.2.xhtml#6-2-3-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-142" playOrder="142">
+        <navLabel>
+          <text>6.3 树的抽象数据类型</text>
+        </navLabel>
+        <content src="Text/6.3.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-143" playOrder="143">
+        <navLabel>
+          <text>6.4 树的存储结构</text>
+        </navLabel>
+        <content src="Text/6.4.xhtml" />
+        <navPoint id="navPoint-144" playOrder="144">
+          <navLabel>
+            <text>6.4.1 双亲表示法</text>
+          </navLabel>
+          <content src="Text/6.4.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-145" playOrder="145">
+          <navLabel>
+            <text>6.4.2 孩子表示法</text>
+          </navLabel>
+          <content src="Text/6.4.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-146" playOrder="146">
+          <navLabel>
+            <text>6.4.3 孩子兄弟表示法</text>
+          </navLabel>
+          <content src="Text/6.4.3.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-147" playOrder="147">
+        <navLabel>
+          <text>6.5 二叉树的定义</text>
+        </navLabel>
+        <content src="Text/6.5.xhtml" />
+        <navPoint id="navPoint-148" playOrder="148">
+          <navLabel>
+            <text>6.5.1 二叉树特点</text>
+          </navLabel>
+          <content src="Text/6.5.xhtml#6-5-1-" />
+        </navPoint>
+        <navPoint id="navPoint-149" playOrder="149">
+          <navLabel>
+            <text>6.5.2 特殊二叉树</text>
+          </navLabel>
+          <content src="Text/6.5.xhtml#6-5-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-150" playOrder="150">
+        <navLabel>
+          <text>6.6 二叉树的性质</text>
+        </navLabel>
+        <content src="Text/6.6.xhtml" />
+        <navPoint id="navPoint-151" playOrder="151">
+          <navLabel>
+            <text>6.6.1 二叉树性质1</text>
+          </navLabel>
+          <content src="Text/6.6.xhtml#6-6-1-1" />
+        </navPoint>
+        <navPoint id="navPoint-152" playOrder="152">
+          <navLabel>
+            <text>6.6.2 二叉树性质2</text>
+          </navLabel>
+          <content src="Text/6.6.xhtml#6-6-2-2" />
+        </navPoint>
+        <navPoint id="navPoint-153" playOrder="153">
+          <navLabel>
+            <text>6.6.3 二叉树性质3</text>
+          </navLabel>
+          <content src="Text/6.6.xhtml#6-6-3-3" />
+        </navPoint>
+        <navPoint id="navPoint-154" playOrder="154">
+          <navLabel>
+            <text>6.6.4 二叉树性质4</text>
+          </navLabel>
+          <content src="Text/6.6.xhtml#6-6-4-4" />
+        </navPoint>
+        <navPoint id="navPoint-155" playOrder="155">
+          <navLabel>
+            <text>6.6.5 二叉树性质5</text>
+          </navLabel>
+          <content src="Text/6.6.xhtml#6-6-5-5" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-156" playOrder="156">
+        <navLabel>
+          <text>6.7 二叉树的存储结构</text>
+        </navLabel>
+        <content src="Text/6.7.xhtml" />
+        <navPoint id="navPoint-157" playOrder="157">
+          <navLabel>
+            <text>6.7.1 二叉树顺序存储结构</text>
+          </navLabel>
+          <content src="Text/6.7.xhtml#6-7-1-" />
+        </navPoint>
+        <navPoint id="navPoint-158" playOrder="158">
+          <navLabel>
+            <text>6.7.2 二叉链表</text>
+          </navLabel>
+          <content src="Text/6.7.xhtml#6-7-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-159" playOrder="159">
+        <navLabel>
+          <text>6.8 遍历二叉树</text>
+        </navLabel>
+        <content src="Text/6.8.1.xhtml" />
+        <navPoint id="navPoint-160" playOrder="160">
+          <navLabel>
+            <text>6.8.1 二叉树遍历原理</text>
+          </navLabel>
+          <content src="Text/6.8.1.xhtml#6-8-1-" />
+        </navPoint>
+        <navPoint id="navPoint-161" playOrder="161">
+          <navLabel>
+            <text>6.8.2 二叉树遍历方法</text>
+          </navLabel>
+          <content src="Text/6.8.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-162" playOrder="162">
+          <navLabel>
+            <text>6.8.3 前序遍历算法</text>
+          </navLabel>
+          <content src="Text/6.8.3.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-163" playOrder="163">
+          <navLabel>
+            <text>6.8.4 中序遍历算法</text>
+          </navLabel>
+          <content src="Text/6.8.4.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-164" playOrder="164">
+          <navLabel>
+            <text>6.8.5 后序遍历算法</text>
+          </navLabel>
+          <content src="Text/6.8.5.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-165" playOrder="165">
+          <navLabel>
+            <text>6.8.6 推导遍历结果</text>
+          </navLabel>
+          <content src="Text/6.8.6.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-166" playOrder="166">
+        <navLabel>
+          <text>6.9 二叉树的建立</text>
+        </navLabel>
+        <content src="Text/6.9.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-167" playOrder="167">
+        <navLabel>
+          <text>6.10 线索二叉树</text>
+        </navLabel>
+        <content src="Text/6.10.xhtml" />
+        <navPoint id="navPoint-168" playOrder="168">
+          <navLabel>
+            <text>6.10.1 线索二叉树原理</text>
+          </navLabel>
+          <content src="Text/6.10.xhtml#6-10-1-" />
+        </navPoint>
+        <navPoint id="navPoint-169" playOrder="169">
+          <navLabel>
+            <text>6.10.2 线索二叉树结构实现</text>
+          </navLabel>
+          <content src="Text/6.10.xhtml#6-10-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-170" playOrder="170">
+        <navLabel>
+          <text>6.11 树、森林与二叉树的转换</text>
+        </navLabel>
+        <content src="Text/6.11.xhtml" />
+        <navPoint id="navPoint-171" playOrder="171">
+          <navLabel>
+            <text>6.11.1 树转换为二叉树</text>
+          </navLabel>
+          <content src="Text/6.11.xhtml#6-11-1-" />
+        </navPoint>
+        <navPoint id="navPoint-172" playOrder="172">
+          <navLabel>
+            <text>6.11.2 森林转换为二叉树</text>
+          </navLabel>
+          <content src="Text/6.11.xhtml#6-11-2-" />
+        </navPoint>
+        <navPoint id="navPoint-173" playOrder="173">
+          <navLabel>
+            <text>6.11.3 二叉树转换为树</text>
+          </navLabel>
+          <content src="Text/6.11.xhtml#6-11-3-" />
+        </navPoint>
+        <navPoint id="navPoint-174" playOrder="174">
+          <navLabel>
+            <text>6.11.4 二叉树转换为森林</text>
+          </navLabel>
+          <content src="Text/6.11.xhtml#6-11-4-" />
+        </navPoint>
+        <navPoint id="navPoint-175" playOrder="175">
+          <navLabel>
+            <text>6.11.5 树与森林的遍历</text>
+          </navLabel>
+          <content src="Text/6.11.xhtml#6-11-5-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-176" playOrder="176">
+        <navLabel>
+          <text>6.12 赫夫曼树及其应用</text>
+        </navLabel>
+        <content src="Text/6.12.xhtml" />
+        <navPoint id="navPoint-177" playOrder="177">
+          <navLabel>
+            <text>6.12.1 赫夫曼树</text>
+          </navLabel>
+          <content src="Text/6.12.xhtml#6-12-1-" />
+        </navPoint>
+        <navPoint id="navPoint-178" playOrder="178">
+          <navLabel>
+            <text>6.12.2 赫夫曼树定义与原理</text>
+          </navLabel>
+          <content src="Text/6.12.xhtml#6-12-2-" />
+        </navPoint>
+        <navPoint id="navPoint-179" playOrder="179">
+          <navLabel>
+            <text>6.12.3 赫夫曼编码</text>
+          </navLabel>
+          <content src="Text/6.12.xhtml#6-12-3-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-180" playOrder="180">
+        <navLabel>
+          <text>6.13 总结回顾</text>
+        </navLabel>
+        <content src="Text/6.13.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-181" playOrder="181">
+        <navLabel>
+          <text>6.14 结尾语</text>
+        </navLabel>
+        <content src="Text/6.14.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-182" playOrder="182">
+      <navLabel>
+        <text>第7章 图</text>
+      </navLabel>
+      <content src="Text/7.xhtml" />
+      <navPoint id="navPoint-183" playOrder="183">
+        <navLabel>
+          <text>7.1 开场白</text>
+        </navLabel>
+        <content src="Text/7.1.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-184" playOrder="184">
+        <navLabel>
+          <text>7.2 图的定义</text>
+        </navLabel>
+        <content src="Text/7.2.xhtml" />
+        <navPoint id="navPoint-185" playOrder="185">
+          <navLabel>
+            <text>7.2.1 各种图定义</text>
+          </navLabel>
+          <content src="Text/7.2.xhtml#7-2-1-" />
+        </navPoint>
+        <navPoint id="navPoint-186" playOrder="186">
+          <navLabel>
+            <text>7.2.2 图的顶点与边间关系</text>
+          </navLabel>
+          <content src="Text/7.2.xhtml#7-2-2-" />
+        </navPoint>
+        <navPoint id="navPoint-187" playOrder="187">
+          <navLabel>
+            <text>7.2.3 连通图相关术语</text>
+          </navLabel>
+          <content src="Text/7.2.xhtml#7-2-3-" />
+        </navPoint>
+        <navPoint id="navPoint-188" playOrder="188">
+          <navLabel>
+            <text>7.2.4 图的定义与术语总结</text>
+          </navLabel>
+          <content src="Text/7.2.xhtml#7-2-4-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-189" playOrder="189">
+        <navLabel>
+          <text>7.3 图的抽象数据类型</text>
+        </navLabel>
+        <content src="Text/7.3.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-190" playOrder="190">
+        <navLabel>
+          <text>7.4 图的存储结构</text>
+        </navLabel>
+        <content src="Text/7.4.xhtml" />
+        <navPoint id="navPoint-191" playOrder="191">
+          <navLabel>
+            <text>7.4.1 邻接矩阵</text>
+          </navLabel>
+          <content src="Text/7.4.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-192" playOrder="192">
+          <navLabel>
+            <text>7.4.2 邻接表</text>
+          </navLabel>
+          <content src="Text/7.4.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-193" playOrder="193">
+          <navLabel>
+            <text>7.4.3 十字链表</text>
+          </navLabel>
+          <content src="Text/7.4.3.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-194" playOrder="194">
+          <navLabel>
+            <text>7.4.4 邻接多重表</text>
+          </navLabel>
+          <content src="Text/7.4.4.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-195" playOrder="195">
+          <navLabel>
+            <text>7.4.5 边集数组</text>
+          </navLabel>
+          <content src="Text/7.4.5.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-196" playOrder="196">
+        <navLabel>
+          <text>7.5 图的遍历</text>
+        </navLabel>
+        <content src="Text/7.5.xhtml" />
+        <navPoint id="navPoint-197" playOrder="197">
+          <navLabel>
+            <text>7.5.1 深度优先遍历</text>
+          </navLabel>
+          <content src="Text/7.5.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-198" playOrder="198">
+          <navLabel>
+            <text>7.5.2 广度优先遍历</text>
+          </navLabel>
+          <content src="Text/7.5.2.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-199" playOrder="199">
+        <navLabel>
+          <text>7.6 最小生成树</text>
+        </navLabel>
+        <content src="Text/7.6.xhtml" />
+        <navPoint id="navPoint-200" playOrder="200">
+          <navLabel>
+            <text>7.6.1 普里姆（Prim）算法</text>
+          </navLabel>
+          <content src="Text/7.6.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-201" playOrder="201">
+          <navLabel>
+            <text>7.6.2 克鲁斯卡尔（Kruskal）算法</text>
+          </navLabel>
+          <content src="Text/7.6.2.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-202" playOrder="202">
+        <navLabel>
+          <text>7.7 最短路径</text>
+        </navLabel>
+        <content src="Text/7.7.xhtml" />
+        <navPoint id="navPoint-203" playOrder="203">
+          <navLabel>
+            <text>7.7.1 迪杰斯特拉（Dijkstra）算法</text>
+          </navLabel>
+          <content src="Text/7.7.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-204" playOrder="204">
+          <navLabel>
+            <text>7.7.2 弗洛伊德（Floyd）算法</text>
+          </navLabel>
+          <content src="Text/7.7.2.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-205" playOrder="205">
+        <navLabel>
+          <text>7.8 拓扑排序</text>
+        </navLabel>
+        <content src="Text/7.8.xhtml" />
+        <navPoint id="navPoint-206" playOrder="206">
+          <navLabel>
+            <text>7.8.1 拓扑排序介绍</text>
+          </navLabel>
+          <content src="Text/7.8.xhtml#7-8-1-" />
+        </navPoint>
+        <navPoint id="navPoint-207" playOrder="207">
+          <navLabel>
+            <text>7.8.2 拓扑排序算法</text>
+          </navLabel>
+          <content src="Text/7.8.xhtml#7-8-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-208" playOrder="208">
+        <navLabel>
+          <text>7.9 关键路径</text>
+        </navLabel>
+        <content src="Text/7.9.xhtml" />
+        <navPoint id="navPoint-209" playOrder="209">
+          <navLabel>
+            <text>7.9.1 关键路径算法原理</text>
+          </navLabel>
+          <content src="Text/7.9.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-210" playOrder="210">
+          <navLabel>
+            <text>7.9.2 关键路径算法</text>
+          </navLabel>
+          <content src="Text/7.9.2.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-211" playOrder="211">
+        <navLabel>
+          <text>7.10 总结回顾</text>
+        </navLabel>
+        <content src="Text/7.10.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-212" playOrder="212">
+        <navLabel>
+          <text>7.11 结尾语</text>
+        </navLabel>
+        <content src="Text/7.11.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-213" playOrder="213">
+      <navLabel>
+        <text>第8章 查找</text>
+      </navLabel>
+      <content src="Text/8.xhtml" />
+      <navPoint id="navPoint-214" playOrder="214">
+        <navLabel>
+          <text>8.1 开场白</text>
+        </navLabel>
+        <content src="Text/8.1.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-215" playOrder="215">
+        <navLabel>
+          <text>8.2 查找概论</text>
+        </navLabel>
+        <content src="Text/8.2.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-216" playOrder="216">
+        <navLabel>
+          <text>8.3 顺序表查找</text>
+        </navLabel>
+        <content src="Text/8.3.xhtml" />
+        <navPoint id="navPoint-217" playOrder="217">
+          <navLabel>
+            <text>8.3.1 顺序表查找算法</text>
+          </navLabel>
+          <content src="Text/8.3.xhtml#8-3-1-" />
+        </navPoint>
+        <navPoint id="navPoint-218" playOrder="218">
+          <navLabel>
+            <text>8.3.2 顺序表查找优化</text>
+          </navLabel>
+          <content src="Text/8.3.xhtml#8-3-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-219" playOrder="219">
+        <navLabel>
+          <text>8.4 有序表查找</text>
+        </navLabel>
+        <content src="Text/8.4.xhtml" />
+        <navPoint id="navPoint-220" playOrder="220">
+          <navLabel>
+            <text>8.4.1 折半查找</text>
+          </navLabel>
+          <content src="Text/8.4.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-221" playOrder="221">
+          <navLabel>
+            <text>8.4.2 插值查找</text>
+          </navLabel>
+          <content src="Text/8.4.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-222" playOrder="222">
+          <navLabel>
+            <text>8.4.3 斐波那契查找</text>
+          </navLabel>
+          <content src="Text/8.4.3.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-223" playOrder="223">
+        <navLabel>
+          <text>8.5 线性索引查找</text>
+        </navLabel>
+        <content src="Text/8.5.xhtml" />
+        <navPoint id="navPoint-224" playOrder="224">
+          <navLabel>
+            <text>8.5.1 稠密索引</text>
+          </navLabel>
+          <content src="Text/8.5.xhtml#8-5-1-" />
+        </navPoint>
+        <navPoint id="navPoint-225" playOrder="225">
+          <navLabel>
+            <text>8.5.2 分块索引</text>
+          </navLabel>
+          <content src="Text/8.5.xhtml#8-5-2-" />
+        </navPoint>
+        <navPoint id="navPoint-226" playOrder="226">
+          <navLabel>
+            <text>8.5.3 倒排索引</text>
+          </navLabel>
+          <content src="Text/8.5.xhtml#8-5-3-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-227" playOrder="227">
+        <navLabel>
+          <text>8.6 二叉排序树</text>
+        </navLabel>
+        <content src="Text/8.6.xhtml" />
+        <navPoint id="navPoint-228" playOrder="228">
+          <navLabel>
+            <text>8.6.1 二叉排序树查找操作</text>
+          </navLabel>
+          <content src="Text/8.6.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-229" playOrder="229">
+          <navLabel>
+            <text>8.6.2 二叉排序树插入操作</text>
+          </navLabel>
+          <content src="Text/8.6.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-230" playOrder="230">
+          <navLabel>
+            <text>8.6.3 二叉排序树删除操作</text>
+          </navLabel>
+          <content src="Text/8.6.3.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-231" playOrder="231">
+          <navLabel>
+            <text>8.6.4 二叉排序树总结</text>
+          </navLabel>
+          <content src="Text/8.6.4.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-232" playOrder="232">
+        <navLabel>
+          <text>8.7 平衡二叉树（AVL树）</text>
+        </navLabel>
+        <content src="Text/8.7.xhtml" />
+        <navPoint id="navPoint-233" playOrder="233">
+          <navLabel>
+            <text>8.7.1 平衡二叉树实现原理</text>
+          </navLabel>
+          <content src="Text/8.7.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-234" playOrder="234">
+          <navLabel>
+            <text>8.7.2 平衡二叉树实现算法</text>
+          </navLabel>
+          <content src="Text/8.7.2.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-235" playOrder="235">
+        <navLabel>
+          <text>8.8 多路查找树（B树）</text>
+        </navLabel>
+        <content src="Text/8.8.xhtml" />
+        <navPoint id="navPoint-236" playOrder="236">
+          <navLabel>
+            <text>8.8.1 2-3树</text>
+          </navLabel>
+          <content src="Text/8.8.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-237" playOrder="237">
+          <navLabel>
+            <text>8.8.2 2-3-4树</text>
+          </navLabel>
+          <content src="Text/8.8.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-238" playOrder="238">
+          <navLabel>
+            <text>8.8.3 B树</text>
+          </navLabel>
+          <content src="Text/8.8.3.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-239" playOrder="239">
+          <navLabel>
+            <text>8.8.4 B+树</text>
+          </navLabel>
+          <content src="Text/8.8.4.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-240" playOrder="240">
+        <navLabel>
+          <text>8.9 散列表查找（哈希表）概述</text>
+        </navLabel>
+        <content src="Text/8.9.xhtml" />
+        <navPoint id="navPoint-241" playOrder="241">
+          <navLabel>
+            <text>8.9.1 散列表查找定义</text>
+          </navLabel>
+          <content src="Text/8.9.xhtml#8-9-1-" />
+        </navPoint>
+        <navPoint id="navPoint-242" playOrder="242">
+          <navLabel>
+            <text>8.9.2 散列表查找步骤</text>
+          </navLabel>
+          <content src="Text/8.9.xhtml#8-9-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-243" playOrder="243">
+        <navLabel>
+          <text>8.10 散列函数的构造方法</text>
+        </navLabel>
+        <content src="Text/8.10.xhtml" />
+        <navPoint id="navPoint-244" playOrder="244">
+          <navLabel>
+            <text>8.10.1 直接定址法</text>
+          </navLabel>
+          <content src="Text/8.10.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-245" playOrder="245">
+          <navLabel>
+            <text>8.10.2 数字分析法</text>
+          </navLabel>
+          <content src="Text/8.10.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-246" playOrder="246">
+          <navLabel>
+            <text>8.10.3 平方取中法</text>
+          </navLabel>
+          <content src="Text/8.10.3.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-247" playOrder="247">
+          <navLabel>
+            <text>8.10.4 折叠法</text>
+          </navLabel>
+          <content src="Text/8.10.4.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-248" playOrder="248">
+          <navLabel>
+            <text>8.10.5 除留余数法</text>
+          </navLabel>
+          <content src="Text/8.10.5.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-249" playOrder="249">
+          <navLabel>
+            <text>8.10.6 随机数法</text>
+          </navLabel>
+          <content src="Text/8.10.6.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-250" playOrder="250">
+        <navLabel>
+          <text>8.11 处理散列冲突的方法</text>
+        </navLabel>
+        <content src="Text/8.11.xhtml" />
+        <navPoint id="navPoint-251" playOrder="251">
+          <navLabel>
+            <text>8.11.1 开放定址法</text>
+          </navLabel>
+          <content src="Text/8.11.xhtml#8-11-1-" />
+        </navPoint>
+        <navPoint id="navPoint-252" playOrder="252">
+          <navLabel>
+            <text>8.11.2 再散列函数法</text>
+          </navLabel>
+          <content src="Text/8.11.xhtml#8-11-2-" />
+        </navPoint>
+        <navPoint id="navPoint-253" playOrder="253">
+          <navLabel>
+            <text>8.11.3 链地址法</text>
+          </navLabel>
+          <content src="Text/8.11.xhtml#8-11-3-" />
+        </navPoint>
+        <navPoint id="navPoint-254" playOrder="254">
+          <navLabel>
+            <text>8.11.4 公共溢出区法</text>
+          </navLabel>
+          <content src="Text/8.11.xhtml#8-11-4-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-255" playOrder="255">
+        <navLabel>
+          <text>8.12 散列表查找实现</text>
+        </navLabel>
+        <content src="Text/8.12.xhtml" />
+        <navPoint id="navPoint-256" playOrder="256">
+          <navLabel>
+            <text>8.12.1 散列表查找算法实现</text>
+          </navLabel>
+          <content src="Text/8.12.xhtml#8-12-1-" />
+        </navPoint>
+        <navPoint id="navPoint-257" playOrder="257">
+          <navLabel>
+            <text>8.12.2 散列表查找性能分析</text>
+          </navLabel>
+          <content src="Text/8.12.xhtml#8-12-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-258" playOrder="258">
+        <navLabel>
+          <text>8.13 总结回顾</text>
+        </navLabel>
+        <content src="Text/8.13.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-259" playOrder="259">
+        <navLabel>
+          <text>8.14 结尾语</text>
+        </navLabel>
+        <content src="Text/8.14.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-260" playOrder="260">
+      <navLabel>
+        <text>第9章 排序</text>
+      </navLabel>
+      <content src="Text/9.xhtml" />
+      <navPoint id="navPoint-261" playOrder="261">
+        <navLabel>
+          <text>9.1 开场白</text>
+        </navLabel>
+        <content src="Text/9.1.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-262" playOrder="262">
+        <navLabel>
+          <text>9.2 排序的基本概念与分类</text>
+        </navLabel>
+        <content src="Text/9.2.xhtml" />
+        <navPoint id="navPoint-263" playOrder="263">
+          <navLabel>
+            <text>9.2.1 排序的稳定性</text>
+          </navLabel>
+          <content src="Text/9.2.xhtml#9-2-1-" />
+        </navPoint>
+        <navPoint id="navPoint-264" playOrder="264">
+          <navLabel>
+            <text>9.2.2 内排序与外排序</text>
+          </navLabel>
+          <content src="Text/9.2.xhtml#9-2-2-" />
+        </navPoint>
+        <navPoint id="navPoint-265" playOrder="265">
+          <navLabel>
+            <text>9.2.3 排序用到的结构与函数</text>
+          </navLabel>
+          <content src="Text/9.2.xhtml#9-2-3-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-266" playOrder="266">
+        <navLabel>
+          <text>9.3 冒泡排序</text>
+        </navLabel>
+        <content src="Text/9.3.xhtml" />
+        <navPoint id="navPoint-267" playOrder="267">
+          <navLabel>
+            <text>9.3.1 最简单排序实现</text>
+          </navLabel>
+          <content src="Text/9.3.xhtml#9-3-1-" />
+        </navPoint>
+        <navPoint id="navPoint-268" playOrder="268">
+          <navLabel>
+            <text>9.3.2 冒泡排序算法</text>
+          </navLabel>
+          <content src="Text/9.3.xhtml#9-3-2-" />
+        </navPoint>
+        <navPoint id="navPoint-269" playOrder="269">
+          <navLabel>
+            <text>9.3.3 冒泡排序优化</text>
+          </navLabel>
+          <content src="Text/9.3.xhtml#9-3-3-" />
+        </navPoint>
+        <navPoint id="navPoint-270" playOrder="270">
+          <navLabel>
+            <text>9.3.4 冒泡排序复杂度分析</text>
+          </navLabel>
+          <content src="Text/9.3.xhtml#9-3-4-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-271" playOrder="271">
+        <navLabel>
+          <text>9.4 简单选择排序</text>
+        </navLabel>
+        <content src="Text/9.4.xhtml" />
+        <navPoint id="navPoint-272" playOrder="272">
+          <navLabel>
+            <text>9.4.1 简单选择排序算法</text>
+          </navLabel>
+          <content src="Text/9.4.xhtml#9-4-1-" />
+        </navPoint>
+        <navPoint id="navPoint-273" playOrder="273">
+          <navLabel>
+            <text>9.4.2 简单选择排序复杂度分析</text>
+          </navLabel>
+          <content src="Text/9.4.xhtml#9-4-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-274" playOrder="274">
+        <navLabel>
+          <text>9.5 直接插入排序</text>
+        </navLabel>
+        <content src="Text/9.5.xhtml" />
+        <navPoint id="navPoint-275" playOrder="275">
+          <navLabel>
+            <text>9.5.1 直接插入排序算法</text>
+          </navLabel>
+          <content src="Text/9.5.xhtml#9-5-1-" />
+        </navPoint>
+        <navPoint id="navPoint-276" playOrder="276">
+          <navLabel>
+            <text>9.5.2 直接插入排序复杂度分析</text>
+          </navLabel>
+          <content src="Text/9.5.xhtml#9-5-2-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-277" playOrder="277">
+        <navLabel>
+          <text>9.6 希尔排序</text>
+        </navLabel>
+        <content src="Text/9.6.xhtml" />
+        <navPoint id="navPoint-278" playOrder="278">
+          <navLabel>
+            <text>9.6.1 希尔排序原理</text>
+          </navLabel>
+          <content src="Text/9.6.xhtml#9-6-1-" />
+        </navPoint>
+        <navPoint id="navPoint-279" playOrder="279">
+          <navLabel>
+            <text>9.6.2 希尔排序算法</text>
+          </navLabel>
+          <content src="Text/9.6.xhtml#9-6-2-" />
+        </navPoint>
+        <navPoint id="navPoint-280" playOrder="280">
+          <navLabel>
+            <text>9.6.3 希尔排序复杂度分析</text>
+          </navLabel>
+          <content src="Text/9.6.xhtml#9-6-3-" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-281" playOrder="281">
+        <navLabel>
+          <text>9.7 堆排序</text>
+        </navLabel>
+        <content src="Text/9.7.xhtml" />
+        <navPoint id="navPoint-282" playOrder="282">
+          <navLabel>
+            <text>9.7.1 堆排序算法</text>
+          </navLabel>
+          <content src="Text/9.7.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-283" playOrder="283">
+          <navLabel>
+            <text>9.7.2 堆排序复杂度分析</text>
+          </navLabel>
+          <content src="Text/9.7.2.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-284" playOrder="284">
+        <navLabel>
+          <text>9.8 归并排序</text>
+        </navLabel>
+        <content src="Text/9.8.xhtml" />
+        <navPoint id="navPoint-285" playOrder="285">
+          <navLabel>
+            <text>9.8.1 归并排序算法</text>
+          </navLabel>
+          <content src="Text/9.8.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-286" playOrder="286">
+          <navLabel>
+            <text>9.8.2 归并排序复杂度分析</text>
+          </navLabel>
+          <content src="Text/9.8.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-287" playOrder="287">
+          <navLabel>
+            <text>9.8.3 非递归实现归并排序</text>
+          </navLabel>
+          <content src="Text/9.8.3.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-288" playOrder="288">
+        <navLabel>
+          <text>9.9 快速排序</text>
+        </navLabel>
+        <content src="Text/9.9.xhtml" />
+        <navPoint id="navPoint-289" playOrder="289">
+          <navLabel>
+            <text>9.9.1 快速排序算法</text>
+          </navLabel>
+          <content src="Text/9.9.1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-290" playOrder="290">
+          <navLabel>
+            <text>9.9.2 快速排序复杂度分析</text>
+          </navLabel>
+          <content src="Text/9.9.2.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint-291" playOrder="291">
+          <navLabel>
+            <text>9.9.3 快速排序优化</text>
+          </navLabel>
+          <content src="Text/9.9.3.xhtml" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-292" playOrder="292">
+        <navLabel>
+          <text>9.10 总结回顾</text>
+        </navLabel>
+        <content src="Text/9.10.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint-293" playOrder="293">
+        <navLabel>
+          <text>9.11 结尾语</text>
+        </navLabel>
+        <content src="Text/9.11.xhtml" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-294" playOrder="294">
+      <navLabel>
+        <text>参考文献</text>
+      </navLabel>
+      <content src="Text/a.xhtml" />
+    </navPoint>
+  </navMap>
+</ncx>

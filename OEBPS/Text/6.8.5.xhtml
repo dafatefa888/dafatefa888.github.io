@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="6-8-5-">6.8.5　后序遍历算法</h3>
+
+  <p>那么同样的，后序遍历也就很容易想到应该如何写代码了。</p>
+  <pre>
+/* 二叉树的后序遍历递归算法 */
+void PostOrderTraverse(BiTree T)
+{
+    if (T == NULL)
+        return;
+    /* 先后序遍历左子树 */
+    PostOrderTraverse(T-&gt;lchild);    
+    /* 再后序遍历右子树 */
+    PostOrderTraverse(T-&gt;rchild);    
+    /* 显示结点数据，可以更改为其他对结点操作 */
+    printf("%c", T-&gt;data);           
+}
+</pre>
+
+  <p>如图6-8-20所示，后序遍历是先递归左子树，由根结点A→B→D→H，结点H无左孩子，再查看结点H的右孩子K，因为结点K无左右孩子，所以打印K，返回。</p>
+
+  <p><img alt="" src="../Images/6-8-20.jpg" /></p>
+
+  <p>图6-8-20</p>
+
+  <p>最终，后序遍历的结点的顺序就是：KHDEB-IFJGCA。同学们可以自己按照刚才的办法得出这个结果。</p>
+</body>
+</html>

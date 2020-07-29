@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h3 id="8-10-1-">8.10.1　直接定址法</h3>
+
+  <p>如果我们现在要对0～100岁的人口数字统计表，如表8-10-1所示，那么我们对年龄这个关键字就可以直接用年龄的数字作为地址。此时f(key)=key。</p>
+
+  <p>表8-10-1</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>地址</th>
+
+        <th>年龄人数</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>0</td>
+
+        <td>0500万</td>
+      </tr>
+
+      <tr>
+        <td>1</td>
+
+        <td>1600万</td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+
+        <td>2450万</td>
+      </tr>
+
+      <tr>
+        <td>………</td>
+
+        <td>………</td>
+      </tr>
+
+      <tr>
+        <td>2020</td>
+
+        <td>1500万</td>
+      </tr>
+
+      <tr>
+        <td>………</td>
+
+        <td>………</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>如果我们现在要统计的是80后出生年份的人口数，如表8-10-2所示，那么我们对出生年份这个关键字可以用年份减去1980来作为地址。此时f(key)=key-1980。</p>
+
+  <p>表8-10-2</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>地址</th>
+
+        <th>出生</th>
+
+        <th>年份人数</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>0</td>
+
+        <td>1980</td>
+
+        <td>1500万</td>
+      </tr>
+
+      <tr>
+        <td>1</td>
+
+        <td>1981</td>
+
+        <td>1600万</td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+
+        <td>1982</td>
+
+        <td>1300万</td>
+      </tr>
+
+      <tr>
+        <td>……</td>
+
+        <td>……</td>
+
+        <td>……</td>
+      </tr>
+
+      <tr>
+        <td>2000</td>
+
+        <td>2000</td>
+
+        <td>800万</td>
+      </tr>
+
+      <tr>
+        <td>……</td>
+
+        <td>……</td>
+
+        <td>……</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>也就是说，我们可以取关键字的某个线性函数值为散列地址，即</p>
+  <pre>
+f(key)=a×key+b（a、b为常数）
+</pre>
+
+  <p>这样的散列函数优点就是简单、均匀，也不会产生冲突，但问题是这需要事先知道关键字的分布情况，适合查找表较小且连续的情况。由于这样的限制，在现实应用中，此方法虽然简单，但却并不常用。</p>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/Style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h2 id="3-7-">3.7　单链表的读取</h2>
+
+  <p>在线性表的顺序存储结构中，我们要计算任意一个元素的存储位置是很容易的。但在单链表中，由于第i个元素到底在哪？没办法一开始就知道，必须得从头开始找。因此，对于单链表实现获取第i个元素的数据的操作GetElem，在算法上，相对要麻烦一些。</p>
+
+  <p>获得链表第i个数据的算法思路：</p>
+
+  <p>1.声明一个指针p指向链表第一个结点，初始化j从1开始；<br />
+  2.当j&lt;i时，就遍历链表，让p的指针向后移动，不断指向下一结点，j累加1；<br />
+  3.若到链表末尾p为空，则说明第i个结点不存在；<br />
+  4.否则查找成功，返回结点p的数据。</p>
+
+  <p>实现代码算法如下：</p>
+  <pre>
+/* 初始条件：顺序线性表L已存在，1≤i≤
+   ListLength(L) */
+/* 操作结果：用e返回L中第i个数据元素的值 */
+Status GetElem(LinkList L, int i, ElemType *e)
+{
+    int j;
+    LinkList p;            /* 声明一指针p */
+    p = L-&gt;next;        /* 让p指向链表L的第个结点 */
+    j = 1;                 /* j为计数器 */
+    /* p不为空且计数器j还没有等于i时，循环继续 */
+    while (p &amp;&amp; j &lt; i)    
+    {
+        p = p-&gt;next;    /* 让p指向下一个结点 */
+        ++j;
+    }
+    if (!p || j &gt; i)
+        return ERROR;      /* 第i个结点不存在 */
+    *e = p-&gt;data;       /* 取第i个结点的数据 */
+    return OK;
+}
+</pre>
+
+  <p>说白了，就是从头开始找，直到第i个结点为止。由于这个算法的时间复杂度取决于i的位置，当i=1时，则不需遍历，第一个就取出数据了，而当i=n时则遍历n-1次才可以。因此最坏情况的时间复杂度是O(n)。</p>
+
+  <p>由于单链表的结构中没有定义表长，所以不能事先知道要循环多少次，因此也就不方便使用for来控制循环。其主要核心思想就是“工作指针后移”，这其实也是很多算法的常用技术。</p>
+
+  <p>此时就有人说，这么麻烦，这数据结构有什么意思！还不如顺序存储结构呢。</p>
+
+  <p>哈，世间万物总是两面的，有好自然有不足，有差自然就有优势。下面我们来看一下在单链表中的如何实现“插入”和“删除”。</p>
+</body>
+</html>
